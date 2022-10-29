@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View, Dimensions } from "react-native";
-import React from "react";
+import { StyleSheet, Dimensions } from "react-native";
+import { Text, Theme } from "./Theme";
 import { RectButton } from "react-native-gesture-handler";
+import { useTheme } from "@shopify/restyle";
+import { useMemo } from "react";
 
 const { width } = Dimensions.get("window");
 
+type Variant = "default" | "primary" | "transparent";
+
 interface ButtonProps {
   label: string;
-  variant: "default" | "primary";
+  variant: Variant;
   onPress: () => void;
 }
 
@@ -18,24 +22,31 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  label: {
-    fontSize: 16,
-    fontFamily: "SFProText-Semibold",
-    textAlign: "center",
-  },
 });
 
 const Button = ({ label, variant, onPress }: ButtonProps) => {
-  const backgroundColor =
-    variant === "primary" ? "#2cb9b0" : "rgba(12, 13, 52, 0.05)";
-  const color = variant === "primary" ? "white" : "#0C0D34";
+  const theme = useTheme<Theme>();
+  const { colors } = theme;
+
+  const variantColors = useMemo(() => {
+    const variants = {
+      primary: { backgroundColor: colors.primary, color: colors.white },
+      transparent: { backgroundColor: "transparent", color: colors.title },
+      default: { backgroundColor: colors.grey, color: colors.title },
+    };
+
+    return variants[variant] || undefined;
+  }, [variant]);
+  const { backgroundColor, color } = variantColors;
 
   return (
     <RectButton
       style={[styles.conteiner, { backgroundColor }]}
       {...{ onPress }}
     >
-      <Text style={[styles.label, { color }]}>{label}</Text>
+      <Text variant="button" style={{ color }}>
+        {label}
+      </Text>
     </RectButton>
   );
 };
