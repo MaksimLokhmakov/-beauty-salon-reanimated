@@ -2,16 +2,17 @@ import { StyleSheet, Dimensions } from "react-native";
 import { Text, Theme } from "./Theme";
 import { RectButton } from "react-native-gesture-handler";
 import { useTheme } from "@shopify/restyle";
-import { useMemo } from "react";
+import { ReactNode } from "react";
 
 const { width } = Dimensions.get("window");
 
 type Variant = "default" | "primary" | "transparent";
 
 interface ButtonProps {
-  label: string;
+  label?: string;
   variant: Variant;
   onPress: () => void;
+  children?: ReactNode;
 }
 
 const styles = StyleSheet.create({
@@ -24,29 +25,33 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = ({ label, variant, onPress }: ButtonProps) => {
+const Button = ({ label, variant, onPress, children }: ButtonProps) => {
   const theme = useTheme<Theme>();
   const { colors } = theme;
 
-  const variantColors = useMemo(() => {
+  const getvariantColors = (variant: Variant) => {
     const variants = {
       primary: { backgroundColor: colors.primary, color: colors.white },
-      transparent: { backgroundColor: "transparent", color: colors.title },
-      default: { backgroundColor: colors.grey, color: colors.title },
+      transparent: { backgroundColor: "transparent", color: colors.secondary },
+      default: { backgroundColor: colors.grey, color: colors.secondary },
     };
 
-    return variants[variant] || undefined;
-  }, [variant]);
-  const { backgroundColor, color } = variantColors;
+    return variants[variant] || variants.default;
+  };
+  const { backgroundColor, color } = getvariantColors(variant);
 
   return (
     <RectButton
       style={[styles.conteiner, { backgroundColor }]}
       {...{ onPress }}
     >
-      <Text variant="button" style={{ color }}>
-        {label}
-      </Text>
+      {children ? (
+        children
+      ) : (
+        <Text variant="button" style={{ color }}>
+          {label}
+        </Text>
+      )}
     </RectButton>
   );
 };

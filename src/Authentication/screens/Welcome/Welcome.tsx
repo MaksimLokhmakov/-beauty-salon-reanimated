@@ -1,13 +1,14 @@
 import { StyleSheet, Image, Dimensions } from "react-native";
-import { Box, Text } from "../../components/Theme";
-import { Button } from "../../components";
+import { Box, Text } from "../../../components/Theme";
+import { Button } from "../../../components";
+import { Routes, StackNavigationProps } from "../../../components/Navigation";
 
-const { height, width } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
-const welcomePicture = { src: require("../../../assets/3.png") };
+const welcomePicture = { src: require("../../../../assets/images/3.png") };
 export const assets = [welcomePicture.src];
 
-const Welcome = () => {
+const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
   return (
     <Box flex={1} backgroundColor="white">
       <Box flex={1} borderBottomRightRadius="xl" backgroundColor="grey">
@@ -53,13 +54,16 @@ const Welcome = () => {
           <Button
             variant="primary"
             label="Есть аккаунт? Войти"
-            onPress={() => {}}
+            onPress={() => navigation.navigate("Login")}
           />
-          <Button label="Регестрация" onPress={() => {}} />
+          <Button
+            label="Регестрация"
+            onPress={() => navigation.navigate("SignUp")}
+          />
           <Button
             variant="transparent"
             label="Забыли пароль?"
-            onPress={() => {}}
+            onPress={() => navigation.navigate("ForgotPassword")}
           />
         </Box>
       </Box>

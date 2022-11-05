@@ -1,6 +1,5 @@
-import { assets as onboardingAssets } from "./Onboarding";
-import { assets as welcomeAssets } from "./Welcome";
+import { assets as onboardingAssets } from "./screens/Onboarding";
+import { assets as welcomeAssets } from "./screens/Welcome";
 
-export { default as Onboarding } from "./Onboarding";
-export { default as Welcome } from "./Welcome";
+export { default as AuthenticationNavigator } from "./Navigator";
 export const assets = [...onboardingAssets, ...welcomeAssets];

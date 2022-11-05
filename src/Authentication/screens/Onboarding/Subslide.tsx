@@ -1,6 +1,6 @@
-import { Dimensions, StyleSheet, View } from "react-native";
-import { Text } from "../../components/Theme";
-import { Button } from "../../components";
+import { Dimensions, StyleSheet } from "react-native";
+import { Text, Box } from "../../../components/Theme";
+import { Button } from "../../../components";
 import React from "react";
 
 const { width, height } = Dimensions.get("window");
@@ -14,7 +14,12 @@ interface SubslideProps {
 
 const Subslide = ({ subtitle, description, last, onPress }: SubslideProps) => {
   return (
-    <View style={styles.conteiner}>
+    <Box
+      padding="xl"
+      justifyContent="center"
+      alignItems="center"
+      {...{ width }}
+    >
       <Text variant="title2" style={styles.subtitle}>
         {subtitle}
       </Text>
@@ -26,19 +31,13 @@ const Subslide = ({ subtitle, description, last, onPress }: SubslideProps) => {
         variant={last ? "primary" : "default"}
         {...{ onPress }}
       />
-    </View>
+    </Box>
   );
 };
 
 export default Subslide;
 
 const styles = StyleSheet.create({
-  conteiner: {
-    width,
-    padding: 42,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   subtitle: {
     marginBottom: height * 0.005,
   },

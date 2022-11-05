@@ -11,10 +11,12 @@ import Animated, {
 import Slide, { SLIDE_HEIGHT } from "./Slide";
 import Subslide from "./Subslide";
 import Dot from "./Dot";
-import { Routes, StackNavigationProps } from "../../components/Navigation";
-import { theme } from "../../components";
+import { Routes, StackNavigationProps } from "../../../components/Navigation";
+import { useTheme, Box } from "../../../components";
 
-const { width, height } = Dimensions.get("window");
+const { width, height: windowHeight } = Dimensions.get("window");
+
+const AnimatedBox = Animated.createAnimatedComponent(Box);
 
 const slides = [
   {
@@ -23,35 +25,35 @@ const slides = [
     description:
       "Мощный пользовательский опыт! Качественные анимации и лучший дизайн!",
     color: "#BFEAF5",
-    picture: require("../../../assets/2.png"),
+    picture: require("../../../../assets/images/2.png"),
   },
   {
     title: "Контроль",
     subtitle: "Полная отчетность",
     description: "Собрание полной отчетности! Контролируй работу всего салона",
     color: "#BEECC4",
-    picture: require("../../../assets/1.png"),
+    picture: require("../../../../assets/images/1.png"),
   },
   {
     title: "Качество",
     subtitle: "Надежное хранение информации",
     description: "Безопасность информации и никаких багов!",
     color: "#FFE4D9",
-    picture: require("../../../assets/2.png"),
+    picture: require("../../../../assets/images/2.png"),
   },
   {
     title: "Журнал",
     subtitle: "Списки клиентов, мастеров и приемов",
     description: "Только у нас удобные журналы клиентов, мастеров и приемов!",
     color: "#ffd9f2",
-    picture: require("../../../assets/1.png"),
+    picture: require("../../../../assets/images/1.png"),
   },
   {
     title: "Время",
     subtitle: "Полное расписание салона",
     description: "Удобное редактирование и просмотр расписания каждого мастера",
     color: "#ebd9ff",
-    picture: require("../../../assets/2.png"),
+    picture: require("../../../../assets/images/2.png"),
   },
   {
     title: "Скорость",
@@ -59,7 +61,7 @@ const slides = [
     description:
       "Лучшая скорость на постсовеском пространстве! Вы сделали правильный выбор",
     color: "#FFDDDD",
-    picture: require("../../../assets/1.png"),
+    picture: require("../../../../assets/images/1.png"),
   },
 ];
 
@@ -71,19 +73,12 @@ const styles = StyleSheet.create({
   slider: {
     height: SLIDE_HEIGHT,
     backgroundColor: "cyan",
-    borderBottomRightRadius: theme.borderRadii.xl,
   },
   footer: {
     flex: 1,
   },
-  fotterContent: {
-    borderTopLeftRadius: theme.borderRadii.xl,
-    flex: 1,
-    backgroundColor: "white",
-  },
   pagination: {
     ...StyleSheet.absoluteFillObject,
-    height: height > 800 ? theme.borderRadii.xl : theme.borderRadii.xl / 1.5,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -97,7 +92,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  picture: {},
 });
 
 export const assets = [slides[0].picture, slides[1].picture];
@@ -105,6 +99,7 @@ export const assets = [slides[0].picture, slides[1].picture];
 const Onboarding = ({
   navigation,
 }: StackNavigationProps<Routes, "Onboarding">) => {
+  const theme = useTheme();
   const scroll = useRef<Animated.ScrollView>(null);
   const x = useSharedValue(0);
   const onScroll = useAnimatedScrollHandler((e) => {
@@ -132,13 +127,16 @@ const Onboarding = ({
 
   return (
     <View style={styles.conteiner}>
-      <Animated.View style={[styles.slider, animatedStyle]}>
+      <AnimatedBox
+        borderBottomRightRadius="xl"
+        style={[styles.slider, animatedStyle]}
+      >
         {slides.map(({ picture }, index) => {
           const right = index % 2 === 0;
 
           const transformPicture = [
             { translateX: (right ? 1 : -1) * width * 0.2 },
-            { translateY: height * 0.12 },
+            { translateY: windowHeight * 0.12 },
             { scale: right ? 0.5 : 0.5 },
           ];
 
@@ -188,17 +186,24 @@ const Onboarding = ({
             <Slide key={index} right={!!(index % 2)} {...{ title }} />
           ))}
         </Animated.ScrollView>
-      </Animated.View>
+      </AnimatedBox>
 
-      <View style={styles.footer}>
+      <Box flex={1}>
         <Animated.View style={[StyleSheet.absoluteFillObject, animatedStyle]} />
 
-        <View style={styles.fotterContent}>
-          <View style={styles.pagination}>
+        <Box flex={1} borderTopLeftRadius="xl" backgroundColor="white">
+          <Box
+            height={
+              windowHeight > 800
+                ? theme.borderRadii.xl
+                : theme.borderRadii.xl / 1.5
+            }
+            style={styles.pagination}
+          >
             {slides.map((_, index) => (
               <Dot key={index} {...{ index, x }} />
             ))}
-          </View>
+          </Box>
 
           <Animated.View
             style={[animatedSubslideStyle, styles.slidesConteiner]}
@@ -227,8 +232,8 @@ const Onboarding = ({
               );
             })}
           </Animated.View>
-        </View>
-      </View>
+        </Box>
+      </Box>
     </View>
   );
 };
