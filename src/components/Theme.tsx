@@ -3,6 +3,9 @@ import {
   createBox,
   useTheme as useReTheme,
 } from "@shopify/restyle";
+import { Dimensions } from "react-native";
+
+export const largeDevice = Dimensions.get("window").height > 700;
 
 const theme = {
   colors: {
@@ -13,6 +16,7 @@ const theme = {
     grey: "rgba(12, 13, 52, 0.05)",
     darkGrey: "#8a8d9a",
     danger: "#ff0058",
+    primaryLight: "#e7f9f7",
   },
   spacing: {
     s: 8,

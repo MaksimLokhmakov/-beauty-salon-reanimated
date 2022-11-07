@@ -1,11 +1,11 @@
 import { StyleSheet, Image, Dimensions } from "react-native";
-import { Box, Text } from "../../../components/Theme";
-import { Button } from "../../../components";
-import { Routes, StackNavigationProps } from "../../../components/Navigation";
+import { Box, Text, largeDevice } from "../../components/Theme";
+import { Button } from "../../components";
+import { Routes, StackNavigationProps } from "../../components/Navigation";
 
 const { height } = Dimensions.get("window");
 
-const welcomePicture = { src: require("../../../../assets/images/3.png") };
+const welcomePicture = { src: require("../../../assets/images/3.png") };
 export const assets = [welcomePicture.src];
 
 const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
@@ -19,7 +19,7 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
             width: height * 0.4,
             height: height * 0.4,
             top: height * 0.05,
-            left: height > 700 ? height * 0.04 : height * 0.08,
+            left: largeDevice ? height * 0.04 : height * 0.08,
           }}
         />
       </Box>
@@ -40,7 +40,7 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
           borderTopLeftRadius="xl"
           justifyContent="space-evenly"
           alignItems="center"
-          padding={height > 700 ? "xl" : "m"}
+          padding={largeDevice ? "xl" : "m"}
         >
           <Text variant="title2" marginBottom="s">
             Начать
@@ -72,5 +72,3 @@ const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
 };
 
 export default Welcome;
-
-const styles = StyleSheet.create({});

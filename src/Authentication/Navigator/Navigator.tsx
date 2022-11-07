@@ -1,6 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { Routes } from "../../components/Navigation";
-import { Onboarding, Welcome, Login, SignUp, ForgotPassword } from "../screens";
+import {
+  Onboarding,
+  Welcome,
+  Login,
+  SignUp,
+  ForgotPassword,
+  PasswordChanged,
+} from "../screens";
 
 const AuthenticationStack = createStackNavigator<Routes>();
 const AuthenticationNavigator = () => {
@@ -13,6 +20,10 @@ const AuthenticationNavigator = () => {
       <AuthenticationStack.Screen
         name="ForgotPassword"
         component={ForgotPassword}
+      />
+      <AuthenticationStack.Screen
+        name="PasswordChanged"
+        component={PasswordChanged}
       />
     </AuthenticationStack.Navigator>
   );

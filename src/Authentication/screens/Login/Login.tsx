@@ -45,9 +45,10 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
       action="Зарегистрируйтесь тут"
     />
   );
+
   return (
-    <Conteiner leftBottomBorder {...{ footer }}>
-      <Box>
+    <Conteiner pattern={0} leftBottomBorder {...{ footer }}>
+      <Box padding="xl">
         <Text variant="title1" padding="s">
           Добро пожаловать
         </Text>
@@ -113,15 +114,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
         </Box>
 
         <Box alignItems="center" marginTop="xl">
-          <Button
-            label="Войти"
-            variant={
-              touched && !errors.phone && !errors.password
-                ? "primary"
-                : "default"
-            }
-            onPress={handleSubmit}
-          />
+          <Button label="Войти" variant={"primary"} onPress={handleSubmit} />
         </Box>
       </Box>
     </Conteiner>

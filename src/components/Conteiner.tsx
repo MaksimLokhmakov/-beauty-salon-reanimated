@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Dimensions } from "react-native";
-import theme, { Box, useTheme } from "./Theme";
+import theme, { Box } from "./Theme";
 import React, { ReactNode } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
@@ -12,12 +12,15 @@ const { xl } = theme.borderRadii;
 
 export const assets = [
   require("../../assets/patterns/1.jpg"),
+  require("../../assets/patterns/4.jpg"),
+  require("../../assets/patterns/3.jpg"),
   require("../../assets/patterns/2.jpg"),
-];
+] as const;
 
 interface ConteinerProps {
   children: ReactNode;
   footer?: ReactNode;
+  pattern: 0 | 1 | 2 | 3;
   rightBottomBorder?: boolean;
   leftBottomBorder?: boolean;
 }
@@ -25,18 +28,16 @@ interface ConteinerProps {
 const Conteiner = ({
   children,
   footer,
+  pattern,
   rightBottomBorder,
   leftBottomBorder,
 }: ConteinerProps) => {
-  const theme = useTheme();
   const insets = useSafeAreaInsets();
-  const topPatternImage = [
-    styles.topPatternImage,
-    {
-      borderBottomLeftRadius: leftBottomBorder ? xl : 0,
-      borderBottomRightRadius: rightBottomBorder ? xl : 0,
-    },
-  ];
+  const topPatternImage = {
+    borderBottomLeftRadius: leftBottomBorder ? xl : 0,
+    borderBottomRightRadius: rightBottomBorder ? xl : 0,
+  };
+  const asset = assets[pattern];
 
   return (
     <>
@@ -49,7 +50,10 @@ const Conteiner = ({
             height={height * 0.2}
             position="absolute"
           >
-            <Image source={assets[1]} style={topPatternImage} />
+            <Image
+              source={asset}
+              style={[topPatternImage, styles.topPatternImage]}
+            />
           </Box>
 
           <Box
@@ -58,7 +62,7 @@ const Conteiner = ({
             borderBottomLeftRadius="xl"
             overflow="hidden"
           >
-            <Image source={assets[1]} style={styles.topCornerPatternImage} />
+            <Image source={asset} style={styles.topCornerPatternImage} />
 
             <Box
               width={totalWidth}
@@ -69,11 +73,7 @@ const Conteiner = ({
               borderBottomLeftRadius="xl"
               maxHeight={height * 0.71}
             >
-              <KeyboardAwareScrollView
-                contentContainerStyle={{ padding: theme.spacing.xl }}
-              >
-                {children}
-              </KeyboardAwareScrollView>
+              <KeyboardAwareScrollView>{children}</KeyboardAwareScrollView>
             </Box>
           </Box>
         </Box>

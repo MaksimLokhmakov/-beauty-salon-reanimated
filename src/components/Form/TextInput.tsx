@@ -3,14 +3,15 @@ import {
   TextInputProps as RNTextInputProps,
 } from "react-native";
 import theme, { Box } from "../Theme";
+import RoundIcon from "../RoundIcon";
 import { Feather as Icon } from "@expo/vector-icons";
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import MaskInput from "react-native-mask-input";
 
-type iconNameType = "phone" | "lock";
+type iconNameType = "phone" | "lock" | "user" | "message-circle";
 
 interface TextInputProps extends RNTextInputProps {
-  icon: iconNameType;
+  icon?: iconNameType;
   error?: string;
   touched?: boolean;
   mask?: (RegExp | string)[];
@@ -54,16 +55,13 @@ const TextInput = forwardRef<RNTextInput, TextInputProps>(
         </Box>
 
         {touched && (
-          <Box
-            width={SIZE}
-            height={SIZE}
-            borderRadius="m"
-            backgroundColor={color}
-            alignItems="center"
-            justifyContent="center"
-            margin="s"
-          >
-            <Icon name={!error ? "check" : "x"} color="white" size={12} />
+          <Box margin="s">
+            <RoundIcon
+              name={!error ? "check" : "x"}
+              color="white"
+              size={SIZE}
+              backgroundColor={theme.colors[color]}
+            />
           </Box>
         )}
       </Box>

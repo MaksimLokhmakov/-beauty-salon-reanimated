@@ -12,7 +12,7 @@ import Slide, { SLIDE_HEIGHT } from "./Slide";
 import Subslide from "./Subslide";
 import Dot from "./Dot";
 import { Routes, StackNavigationProps } from "../../../components/Navigation";
-import { useTheme, Box } from "../../../components";
+import { useTheme, Box, largeDevice } from "../../../components";
 
 const { width, height: windowHeight } = Dimensions.get("window");
 
@@ -137,7 +137,7 @@ const Onboarding = ({
           const transformPicture = [
             { translateX: (right ? 1 : -1) * width * 0.2 },
             { translateY: windowHeight * 0.12 },
-            { scale: right ? 0.5 : 0.5 },
+            { scale: 0.5 },
           ];
 
           const animatedStyle = useAnimatedStyle(() => {
@@ -194,9 +194,7 @@ const Onboarding = ({
         <Box flex={1} borderTopLeftRadius="xl" backgroundColor="white">
           <Box
             height={
-              windowHeight > 800
-                ? theme.borderRadii.xl
-                : theme.borderRadii.xl / 1.5
+              largeDevice ? theme.borderRadii.xl : theme.borderRadii.xl / 1.5
             }
             style={styles.pagination}
           >

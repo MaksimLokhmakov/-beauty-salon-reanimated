@@ -1,11 +1,13 @@
-import { TextInput } from "../../../components/Form";
-import { Box, Text } from "../../../components/Theme";
-import { Button, Conteiner } from "../../../components";
-import { phoneInputMask } from "../../utils/consts";
+import { ScrollView, Dimensions, TextInput as RNTextInput } from "react-native";
+import { useRef } from "react";
+import { Conteiner, Box } from "../../../components";
 import { useFormik } from "formik";
 import { Footer } from "../../components";
 import { Routes, StackNavigationProps } from "../../../components/Navigation";
+import { VerificationSlide, PhoneSlide, PasswordChangeSlide } from "./slides";
 import * as Yup from "yup";
+
+const { width } = Dimensions.get("window");
 
 const ForgotPasswordSchema = Yup.object().shape({
   phone: Yup.string()
@@ -30,25 +32,23 @@ const ForgotPasswordSchema = Yup.object().shape({
 const ForgotPassword = ({
   navigation,
 }: StackNavigationProps<Routes, "ForgotPassword">) => {
-  const {
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    setFieldValue,
-    values,
-    errors,
-    touched,
-  } = useFormik({
-    initialValues: {
-      phone: "",
-      password: "",
-      message: "",
-      passwordConfirmation: "",
-    },
-    validationSchema: ForgotPasswordSchema,
-    onSubmit: ({ phone, password, message, passwordConfirmation }) =>
-      alert(`Phone: ${phone}, Password: ${password}, Remember: ${message}`),
-  });
+  const scroll = useRef<ScrollView>(null);
+  const message = useRef<RNTextInput>(null);
+  const password = useRef<RNTextInput>(null);
+  const slidesConteinerWidth = width * 3;
+
+  const { handleChange, handleBlur, handleSubmit, values, errors, touched } =
+    useFormik({
+      initialValues: {
+        phone: "",
+        password: "",
+        message: "",
+        passwordConfirmation: "",
+      },
+      validationSchema: ForgotPasswordSchema,
+      onSubmit: ({ phone, password, message }) =>
+        alert(`Phone: ${phone}, Password: ${password}, Remember: ${message}`),
+    });
 
   const footer = (
     <Footer
@@ -58,39 +58,69 @@ const ForgotPassword = ({
     />
   );
 
-  return (
-    <Conteiner {...{ footer }}>
-      <Box>
-        <Text variant="title1" padding="s">
-          Забыли пароль?
-        </Text>
-        <Text variant="body" paddingTop="s" paddingBottom="l">
-          Введите номер телефона к которому привязан ваш аккаунт
-        </Text>
+  const phoneSlideSubmit = () => {
+    scroll.current?.scrollTo({ x: width });
+    message.current?.focus();
+  };
 
-        <Box marginBottom="s">
-          <TextInput
-            icon="phone"
-            placeholder="Введите моб. номер"
+  const verificationSlideSubmit = () => {
+    scroll.current?.scrollTo({ x: width * 2 });
+    password.current?.focus();
+  };
+
+  const passwordChangeSubmit = () => {
+    handleSubmit();
+    navigation.navigate("PasswordChanged");
+  };
+
+  return (
+    <Conteiner pattern={1} {...{ footer }}>
+      <ScrollView
+        ref={scroll}
+        snapToInterval={width}
+        decelerationRate="fast"
+        showsHorizontalScrollIndicator={false}
+        bounces={false}
+        scrollEnabled={false}
+        horizontal
+      >
+        <Box width={slidesConteinerWidth} flexDirection="row">
+          <PhoneSlide
             value={values.phone}
             onChangeText={handleChange("phone")}
             onBlur={handleBlur("phone")}
-            mask={phoneInputMask}
-            maxLength={17}
             error={errors.phone}
             touched={touched.phone}
-            // onSubmitEditing={() => password.current?.focus()}
+            onSubmit={phoneSlideSubmit}
           />
-        </Box>
 
-        <Box alignItems="center" marginTop="xl">
-          <Button
-            label="Продолжить"
-            variant={!errors.phone ? "primary" : "default"}
-            onPress={handleSubmit}
+          <VerificationSlide
+            ref={message}
+            value={values.message}
+            onChangeText={handleChange("message")}
+            onBlur={handleBlur("message")}
+            error={errors.message}
+            touched={touched.message}
+            onSubmit={verificationSlideSubmit}
+            onPressConfirmationCodeField={() => message.current?.focus()}
+          />
+
+          <PasswordChangeSlide
+            ref={password}
+            value={values.password}
+            onChangeText={handleChange("password")}
+            onBlur={handleBlur("password")}
+            error={errors.password}
+            touched={touched.password}
+            cValue={values.passwordConfirmation}
+            cOnChange={handleChange("passwordConfirmation")}
+            cOnBlur={handleBlur("passwordConfirmation")}
+            cError={errors.passwordConfirmation}
+            cTouched={touched.passwordConfirmation}
+            onSubmit={passwordChangeSubmit}
           />
         </Box>
-      </Box>
+      </ScrollView>
     </Conteiner>
   );
 };

@@ -74,8 +74,8 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
   );
 
   return (
-    <Conteiner rightBottomBorder {...{ footer }}>
-      <Box>
+    <Conteiner pattern={2} rightBottomBorder {...{ footer }}>
+      <Box padding="xl">
         <Text variant="title1" padding="s">
           Создать аккаунт
         </Text>
@@ -85,7 +85,7 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
 
         <Box marginBottom="s">
           <TextInput
-            icon="phone"
+            icon="user"
             placeholder="Введите имя"
             value={values.name}
             onChangeText={handleChange("name")}
@@ -100,8 +100,8 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
 
         <Box marginBottom="s">
           <TextInput
+            icon="user"
             ref={surname}
-            icon="phone"
             placeholder="Введите фамилию"
             value={values.surname}
             onChangeText={handleChange("surname")}
@@ -192,11 +192,7 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
         </Box>
 
         <Box alignItems="center" marginTop="xl">
-          <Button
-            label="Войти"
-            variant={!errors ? "primary" : "default"}
-            onPress={handleSubmit}
-          />
+          <Button label="Создать" variant={"primary"} onPress={handleSubmit} />
         </Box>
       </Box>
     </Conteiner>
