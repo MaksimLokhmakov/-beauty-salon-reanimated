@@ -1,11 +1,11 @@
 import { RectButton } from "react-native-gesture-handler";
 import RoundIcon, { RoundIconProps } from "./RoundIcon";
 
-interface CloseButtonProps extends RoundIconProps {
+interface RoundIconButtonProps extends RoundIconProps {
   onPress: () => void;
 }
 
-const CloseButton = ({ onPress, ...props }: CloseButtonProps) => {
+const RoundIconButton = ({ onPress, ...props }: RoundIconButtonProps) => {
   return (
     <RectButton {...{ onPress }}>
       <RoundIcon {...props} />
@@ -13,4 +13,4 @@ const CloseButton = ({ onPress, ...props }: CloseButtonProps) => {
   );
 };
 
-export default CloseButton;
+export default RoundIconButton;

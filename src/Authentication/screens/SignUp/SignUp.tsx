@@ -4,9 +4,11 @@ import { Footer } from "../../components";
 import React, { useRef, useState } from "react";
 import { Routes, StackNavigationProps } from "../../../components/Navigation";
 import { useFormik } from "formik";
-import { TextInput as RNTextInput, TouchableOpacity } from "react-native";
+import { TextInput as RNTextInput } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 import { Checkbox, TextInput } from "../../../components/Form";
 import { phoneInputMask } from "../../utils/consts";
+import { getAllErrors } from "../../utils/getAllErrors";
 import * as Yup from "yup";
 
 const SignUpSchema = Yup.object().shape({
@@ -72,6 +74,8 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
       action="Войти"
     />
   );
+
+  const error = getAllErrors(errors, touched, touched.phone);
 
   return (
     <Conteiner pattern={2} rightBottomBorder {...{ footer }}>
@@ -188,15 +192,19 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
             label="Запомнить"
           />
 
-          <TouchableOpacity onPress={() => setPasswordVisible((prev) => !prev)}>
+          <BorderlessButton onPress={() => setPasswordVisible((prev) => !prev)}>
             <Text variant="button" color="primary">
               {`${passwordVisible ? "Скрыть" : "Показать"} пароль`}
             </Text>
-          </TouchableOpacity>
+          </BorderlessButton>
         </Box>
 
         <Box alignItems="center" marginTop="xl">
-          <Button label="Создать" variant={"primary"} onPress={handleSubmit} />
+          <Button
+            label="Создать"
+            variant={error ? "primary" : "default"}
+            onPress={handleSubmit}
+          />
         </Box>
       </Box>
     </Conteiner>

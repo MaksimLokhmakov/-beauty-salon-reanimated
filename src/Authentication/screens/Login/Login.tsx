@@ -1,4 +1,5 @@
-import { TextInput as RNTextInput, TouchableOpacity } from "react-native";
+import { TextInput as RNTextInput } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 import { TextInput, Checkbox } from "../../../components/Form";
 import { Box, Text } from "../../../components/Theme";
 import { Button, Conteiner } from "../../../components";
@@ -7,6 +8,7 @@ import { useRef } from "react";
 import { useFormik } from "formik";
 import { Footer } from "../../components";
 import { Routes, StackNavigationProps } from "../../../components/Navigation";
+import { getAllErrors } from "../../utils/getAllErrors";
 import * as Yup from "yup";
 
 const LoginSchema = Yup.object().shape({
@@ -45,6 +47,8 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
       action="Зарегистрируйтесь тут"
     />
   );
+
+  const error = getAllErrors(errors, touched, touched.phone);
 
   return (
     <Conteiner pattern={0} leftBottomBorder {...{ footer }}>
@@ -99,23 +103,25 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
         >
           <Checkbox
             checked={values.remember}
-            onChange={() => {
-              setFieldValue("remember", !values.remember);
-            }}
+            onChange={() => setFieldValue("remember", !values.remember)}
             label="Запомнить"
           />
 
-          <TouchableOpacity
+          <BorderlessButton
             onPress={() => navigation.navigate("ForgotPassword")}
           >
             <Text variant="button" color="primary">
               Забыли пароль
             </Text>
-          </TouchableOpacity>
+          </BorderlessButton>
         </Box>
 
         <Box alignItems="center" marginTop="xl">
-          <Button label="Войти" variant={"primary"} onPress={handleSubmit} />
+          <Button
+            label="Войти"
+            variant={error ? "primary" : "default"}
+            onPress={handleSubmit}
+          />
         </Box>
       </Box>
     </Conteiner>

@@ -2,9 +2,9 @@ import { forwardRef, useRef, useState } from "react";
 import {
   TextInputProps as RNTextInputProps,
   TextInput as RNTextInput,
-  TouchableOpacity,
   Dimensions,
 } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 import { Box, Text, TextInput, Button } from "../../../../components";
 
 const { width } = Dimensions.get("window");
@@ -81,11 +81,11 @@ const PasswordChangeSlide = forwardRef<RNTextInput, PhoneSlideProps>(
           />
         </Box>
 
-        <TouchableOpacity onPress={() => setPasswordVisible((prev) => !prev)}>
+        <BorderlessButton onPress={() => setPasswordVisible((prev) => !prev)}>
           <Text variant="button" color="primary" textAlign="left">
             {`${!passwordVisible ? "Скрыть" : "Показать"} пароль`}
           </Text>
-        </TouchableOpacity>
+        </BorderlessButton>
 
         <Box alignItems="center" marginTop="xl">
           <Button

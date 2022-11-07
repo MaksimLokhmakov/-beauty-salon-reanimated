@@ -2,7 +2,7 @@ import {
   Conteiner,
   Box,
   Text,
-  CloseButton,
+  RoundIconButton,
   RoundIcon,
   useTheme,
   Button,
@@ -38,7 +38,7 @@ const PasswordChanged = ({
 
   const footer = (
     <Box padding="xl">
-      <CloseButton
+      <RoundIconButton
         backgroundColor="white"
         color="black"
         name="x"

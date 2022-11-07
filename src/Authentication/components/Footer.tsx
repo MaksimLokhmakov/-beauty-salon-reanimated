@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 import React from "react";
 import { Box, Text } from "../../components";
 
@@ -13,11 +13,11 @@ const Footer = ({ onPress, title, action }: FooterProps) => (
     <Text variant="body" color="white" marginRight="s">
       {title}
     </Text>
-    <TouchableOpacity {...{ onPress }}>
+    <BorderlessButton {...{ onPress }}>
       <Text variant="body" color="primary">
         {action}
       </Text>
-    </TouchableOpacity>
+    </BorderlessButton>
   </Box>
 );
 
