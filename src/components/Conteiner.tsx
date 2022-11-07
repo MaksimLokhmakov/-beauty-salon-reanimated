@@ -47,7 +47,7 @@ const Conteiner = ({
           <Box
             backgroundColor="white"
             width={totalWidth}
-            height={height * 0.2}
+            height={height * 0.4}
             position="absolute"
           >
             <Image
