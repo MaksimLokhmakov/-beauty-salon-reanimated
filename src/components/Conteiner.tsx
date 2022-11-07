@@ -8,7 +8,6 @@ import { StatusBar } from "expo-status-bar";
 
 const { width, height } = Dimensions.get("window");
 const shiftTop = -1 * (height > 700 ? height / 3.5 : height / 2.5);
-const imageHeight = height / 7;
 const { xl } = theme.borderRadii;
 
 export const assets = [
@@ -87,10 +86,6 @@ const Conteiner = ({
       </Box>
     </OSKeyboardAwareScrollView>
   );
-};
-
-Conteiner.defaultProps = {
-  variant: "bottomRightRadius",
 };
 
 export default Conteiner;
