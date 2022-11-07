@@ -67,6 +67,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
             maxLength={17}
             error={errors.phone}
             touched={touched.phone}
+            blurOnSubmit={false}
             onSubmitEditing={() => password.current?.focus()}
           />
         </Box>

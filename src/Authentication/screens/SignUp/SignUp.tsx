@@ -94,6 +94,7 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
             touched={touched.name}
             returnKeyLabel="next"
             returnKeyType="next"
+            blurOnSubmit={false}
             onSubmitEditing={() => surname.current?.focus()}
           />
         </Box>
@@ -110,6 +111,7 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
             touched={touched.surname}
             returnKeyLabel="next"
             returnKeyType="next"
+            blurOnSubmit={false}
             onSubmitEditing={() => phone.current?.focus()}
           />
         </Box>
@@ -128,6 +130,7 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
             touched={touched.phone}
             returnKeyLabel="next"
             returnKeyType="next"
+            blurOnSubmit={false}
             onSubmitEditing={() => password.current?.focus()}
           />
         </Box>
@@ -146,6 +149,7 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
             autoCapitalize="none"
             returnKeyLabel="next"
             returnKeyType="next"
+            blurOnSubmit={false}
             onSubmitEditing={() => passwordConfirmation.current?.focus()}
             secureTextEntry={!passwordVisible}
           />
