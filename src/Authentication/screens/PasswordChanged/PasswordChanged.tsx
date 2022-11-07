@@ -29,7 +29,7 @@ const PasswordChanged = ({
     }, 500);
   }, []);
 
-  const customSpringStyles = useAnimatedStyle(() => {
+  const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: x.value,
       transform: [{ scale: x.value }],
@@ -51,11 +51,7 @@ const PasswordChanged = ({
   return (
     <Conteiner pattern={1} leftBottomBorder {...{ footer }}>
       <Box padding="xl" justifyContent="center">
-        <AnimatedBox
-          alignItems="center"
-          marginBottom="l"
-          style={customSpringStyles}
-        >
+        <AnimatedBox alignItems="center" marginBottom="l" style={animatedStyle}>
           <RoundIcon
             size={100}
             name="check"
