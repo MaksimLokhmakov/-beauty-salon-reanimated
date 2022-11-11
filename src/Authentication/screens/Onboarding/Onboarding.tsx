@@ -11,7 +11,7 @@ import Animated, {
 import Slide, { SLIDE_HEIGHT } from "./Slide";
 import Subslide from "./Subslide";
 import Dot from "./Dot";
-import { Routes, StackNavigationProps } from "../../../components/Navigation";
+import { AuthNavigationProps } from "../../../components/Navigation";
 import { useTheme, Box, largeDevice } from "../../../components";
 
 const { width, height: windowHeight } = Dimensions.get("window");
@@ -96,9 +96,7 @@ const styles = StyleSheet.create({
 
 export const assets = [slides[0].picture, slides[1].picture];
 
-const Onboarding = ({
-  navigation,
-}: StackNavigationProps<Routes, "Onboarding">) => {
+const Onboarding = ({ navigation }: AuthNavigationProps<"Onboarding">) => {
   const theme = useTheme();
   const scroll = useRef<Animated.ScrollView>(null);
   const x = useSharedValue(0);

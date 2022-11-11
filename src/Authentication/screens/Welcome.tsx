@@ -1,14 +1,14 @@
 import { StyleSheet, Image, Dimensions } from "react-native";
 import { Box, Text, largeDevice } from "../../components/Theme";
 import { Button } from "../../components";
-import { Routes, StackNavigationProps } from "../../components/Navigation";
+import { AuthNavigationProps } from "../../components/Navigation";
 
 const { height } = Dimensions.get("window");
 
 const welcomePicture = { src: require("../../../assets/images/3.png") };
 export const assets = [welcomePicture.src];
 
-const Welcome = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
+const Welcome = ({ navigation }: AuthNavigationProps<"Welcome">) => {
   return (
     <Box flex={1} backgroundColor="white">
       <Box flex={1} borderBottomRightRadius="xl" backgroundColor="grey">

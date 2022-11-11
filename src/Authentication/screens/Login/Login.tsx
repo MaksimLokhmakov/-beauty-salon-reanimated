@@ -7,7 +7,7 @@ import { phoneInputMask } from "../../utils/consts";
 import { useRef } from "react";
 import { useFormik } from "formik";
 import { Footer } from "../../components";
-import { Routes, StackNavigationProps } from "../../../components/Navigation";
+import { AuthNavigationProps } from "../../../components/Navigation";
 import { getAllErrors } from "../../utils/getAllErrors";
 import * as Yup from "yup";
 
@@ -22,7 +22,7 @@ const LoginSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
+const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
   const password = useRef<RNTextInput>(null);
 
   const {
@@ -36,8 +36,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Login">) => {
   } = useFormik({
     initialValues: { phone: "", password: "", remember: false },
     validationSchema: LoginSchema,
-    onSubmit: ({ phone, password, remember }) =>
-      alert(`Phone: ${phone}, Password: ${password}, Remember: ${remember}`),
+    onSubmit: () => navigation.navigate("Home"),
   });
 
   const footer = (

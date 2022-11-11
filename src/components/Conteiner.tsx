@@ -1,13 +1,13 @@
 import { Image, StyleSheet, Dimensions } from "react-native";
 import OSKeyboardAwareScrollView from "./OSKeyboardAwareScrollView";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import theme, { Box } from "./Theme";
+import theme, { Box, largeDevice } from "./Theme";
 import React, { ReactNode } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 
 const { width, height } = Dimensions.get("window");
-const shiftTop = -1 * (height > 700 ? height / 3.5 : height / 2.5);
+const shiftTop = -1 * (largeDevice ? height / 3.5 : height / 2.5);
 const { xl } = theme.borderRadii;
 
 export const assets = [
@@ -40,7 +40,7 @@ const Conteiner = ({
   const asset = assets[pattern];
 
   return (
-    <OSKeyboardAwareScrollView OS="android">
+    <OSKeyboardAwareScrollView OS="android" {...{ height }}>
       <StatusBar style="dark" />
       <Box backgroundColor="secondary" {...{ height }}>
         <Box flex={1} overflow="hidden">

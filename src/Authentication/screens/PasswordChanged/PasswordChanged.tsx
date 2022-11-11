@@ -7,7 +7,7 @@ import {
   useTheme,
   Button,
 } from "../../../components";
-import { Routes, StackNavigationProps } from "../../../components/Navigation";
+import { AuthNavigationProps } from "../../../components/Navigation";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -19,7 +19,7 @@ const AnimatedBox = Animated.createAnimatedComponent(Box);
 
 const PasswordChanged = ({
   navigation,
-}: StackNavigationProps<Routes, "PasswordChanged">) => {
+}: AuthNavigationProps<"PasswordChanged">) => {
   const theme = useTheme();
   const x = useSharedValue(0);
 

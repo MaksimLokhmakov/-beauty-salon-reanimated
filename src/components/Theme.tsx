@@ -17,6 +17,11 @@ const theme = {
     darkGrey: "#8a8d9a",
     danger: "#ff0058",
     primaryLight: "#e7f9f7",
+    yellow: "#f4c742",
+    pink: "#eb809a",
+    orange: "#e8562a",
+    blue: "#3b1aaf",
+    black: "#0a0b35",
   },
   spacing: {
     s: 8,
@@ -38,6 +43,13 @@ const theme = {
       lineHeight: 70,
       color: "white",
       textAlign: "center",
+    },
+    header: {
+      fontFamily: "SFProText-Regular",
+      fontSize: 16,
+      color: "white",
+      textAlign: "center",
+      letterSpacing: 2,
     },
     title1: {
       fontSize: 28,

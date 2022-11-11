@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Routes } from "../../components/Navigation";
+import { AuthenticationRoutes } from "../../components/Navigation";
 import {
   Onboarding,
   Welcome,
@@ -9,7 +9,7 @@ import {
   PasswordChanged,
 } from "../screens";
 
-const AuthenticationStack = createStackNavigator<Routes>();
+const AuthenticationStack = createStackNavigator<AuthenticationRoutes>();
 const AuthenticationNavigator = () => {
   return (
     <AuthenticationStack.Navigator screenOptions={{ headerShown: false }}>

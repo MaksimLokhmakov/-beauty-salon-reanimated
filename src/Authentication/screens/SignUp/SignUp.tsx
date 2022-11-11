@@ -2,7 +2,7 @@ import { Button, Conteiner } from "../../../components";
 import { Box, Text } from "../../../components/Theme";
 import { Footer } from "../../components";
 import React, { useRef, useState } from "react";
-import { Routes, StackNavigationProps } from "../../../components/Navigation";
+import { AuthNavigationProps } from "../../../components/Navigation";
 import { useFormik } from "formik";
 import { TextInput as RNTextInput } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
@@ -35,7 +35,7 @@ const SignUpSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
+const SignUp = ({ navigation }: AuthNavigationProps<"SignUp">) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const surname = useRef<RNTextInput>(null);
@@ -61,10 +61,7 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "SignUp">) => {
       remember: false,
     },
     validationSchema: SignUpSchema,
-    onSubmit: ({ name, surname, phone, password, remember }) =>
-      alert(
-        `Name: ${name}, Surname: ${surname},  Phone: ${phone}, Password: ${password}, Remember: ${remember}`
-      ),
+    onSubmit: () => navigation.navigate("Home"),
   });
 
   const footer = (

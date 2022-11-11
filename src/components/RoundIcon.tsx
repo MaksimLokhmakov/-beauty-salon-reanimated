@@ -1,10 +1,23 @@
 import { Box } from "./Theme";
 import { Feather as Icon } from "@expo/vector-icons";
 
+export type RoundIconName =
+  | "check"
+  | "lock"
+  | "x"
+  | "user"
+  | "users"
+  | "book-open"
+  | "bar-chart-2"
+  | "clock"
+  | "settings"
+  | "arrow-left"
+  | "menu"
+  | "plus";
 export interface RoundIconProps {
   size: number;
   iconSize?: number;
-  name: "check" | "lock" | "x";
+  name: RoundIconName;
   color: string;
   backgroundColor: string;
 }

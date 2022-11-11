@@ -4,4 +4,4 @@ export { default as Button } from "./Button";
 export { default as Conteiner, assets } from "./Conteiner";
 export { TextInput, ConfirmationCodeField } from "./Form";
 export { default as RoundIconButton } from "./RoundIconButton";
-export { default as RoundIcon } from "./RoundIcon";
+export { default as RoundIcon, RoundIconName } from "./RoundIcon";

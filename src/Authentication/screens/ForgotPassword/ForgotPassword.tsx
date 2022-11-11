@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { Conteiner, Box } from "../../../components";
 import { useFormik } from "formik";
 import { Footer } from "../../components";
-import { Routes, StackNavigationProps } from "../../../components/Navigation";
+import { AuthNavigationProps } from "../../../components/Navigation";
 import { VerificationSlide, PhoneSlide, PasswordChangeSlide } from "./slides";
 import * as Yup from "yup";
 
@@ -31,7 +31,7 @@ const ForgotPasswordSchema = Yup.object().shape({
 
 const ForgotPassword = ({
   navigation,
-}: StackNavigationProps<Routes, "ForgotPassword">) => {
+}: AuthNavigationProps<"ForgotPassword">) => {
   const scroll = useRef<ScrollView>(null);
   const message = useRef<RNTextInput>(null);
   const password = useRef<RNTextInput>(null);
