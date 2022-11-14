@@ -10,15 +10,14 @@ import {
 export const HEADER_HEIGHT = 45;
 const HEADER_ICON_SIZE = 30;
 
+export type HeaderСornerType = {
+  icon: RoundIconName;
+  onPress: () => void;
+};
+
 export interface HeaderProps {
-  left?: {
-    icon: RoundIconName;
-    onPress: () => void;
-  };
-  right?: {
-    icon: RoundIconName;
-    onPress: () => void;
-  };
+  left?: HeaderСornerType;
+  right?: HeaderСornerType;
   title?: string;
   dark?: boolean;
 }

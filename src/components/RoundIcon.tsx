@@ -13,7 +13,9 @@ export type RoundIconName =
   | "settings"
   | "arrow-left"
   | "menu"
-  | "plus";
+  | "plus"
+  | "phone"
+  | "trash-2";
 export interface RoundIconProps {
   size: number;
   iconSize?: number;

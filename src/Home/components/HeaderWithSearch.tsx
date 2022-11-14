@@ -10,7 +10,6 @@ import Animated, {
   Extrapolate,
   interpolate,
   useAnimatedStyle,
-  withTiming,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -21,8 +20,6 @@ export const HEADER_WITH_SEARCH_HEIGHT =
 
 const AnimatedBox = Animated.createAnimatedComponent(Box);
 
-interface HeaderWithSearchProps extends HeaderProps, SearchBarProps {}
-
 const HeaderWithSearch = ({
   x,
   y,
@@ -31,16 +28,16 @@ const HeaderWithSearch = ({
   title,
   onChangeText,
   value,
+  onClear,
   onBlur,
   onFocus,
-  onClear,
-}: HeaderWithSearchProps) => {
+}: SearchBarProps & HeaderProps) => {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
   const currentHeight =
     HEADER_WITH_SEARCH_HEIGHT + insets.top || theme.spacing.m;
 
-  const inputFocusHeight = useAnimatedStyle(() => {
+  const inputFocusConteinerStyle = useAnimatedStyle(() => {
     const height = interpolate(
       x.value,
       [0, CLOSE_BUTTON_WIDTH],
@@ -50,17 +47,7 @@ const HeaderWithSearch = ({
     return { height };
   });
 
-  const inputFocusTranslateY = useAnimatedStyle(() => {
-    const translateY = interpolate(
-      x.value,
-      [0, CLOSE_BUTTON_WIDTH],
-      [0, -currentHeight]
-    );
-
-    return { transform: [{ translateY }] };
-  });
-
-  const scrollHeight = useAnimatedStyle(() => {
+  const scrollСonteinerStyle = useAnimatedStyle(() => {
     const height = interpolate(
       y.value,
       [-WINDOW_HEIGHT, 0, SEARCH_HEIGHT],
@@ -69,6 +56,16 @@ const HeaderWithSearch = ({
     );
 
     return { height };
+  });
+
+  const inputFocusStyle = useAnimatedStyle(() => {
+    const translateY = interpolate(
+      x.value,
+      [0, CLOSE_BUTTON_WIDTH],
+      [0, -currentHeight]
+    );
+
+    return { transform: [{ translateY }] };
   });
 
   return (
@@ -81,15 +78,15 @@ const HeaderWithSearch = ({
       backgroundColor="white"
       borderBottomColor="darkGrey"
       borderBottomWidth={1}
-      zIndex={1}
-      elevation={1}
+      zIndex={10}
+      elevation={10}
       style={[
         { paddingBottom: HEADER_WITH_SEARCH_PADDING_BOTTOM },
-        scrollHeight,
-        inputFocusHeight,
+        scrollСonteinerStyle,
+        inputFocusConteinerStyle,
       ]}
     >
-      <AnimatedBox style={inputFocusTranslateY}>
+      <AnimatedBox style={inputFocusStyle}>
         <Header {...{ y, left, right, title }} />
       </AnimatedBox>
 

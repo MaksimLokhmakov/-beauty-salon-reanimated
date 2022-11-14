@@ -1,8 +1,9 @@
 import { Masters } from "../screens";
 import DrawerContent, { DRAWER_WIDTH } from "../Drawer";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { HomeRoutes } from "../../components/Navigation";
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<HomeRoutes>();
 
 const HomeNavigator = () => {
   return (

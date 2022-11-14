@@ -19,7 +19,7 @@ const Avatar = ({ name, size }: AvatarProps) => {
       alignItems="center"
       style={{ borderRadius: size / 2, backgroundColor }}
     >
-      <Text variant="title1" style={{ color }}>
+      <Text variant="title1" style={{ color, fontSize: size / 3 }}>
         {firstLetters}
       </Text>
     </Box>
