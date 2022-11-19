@@ -1,5 +1,5 @@
-export const getAvatarColor = (letter: string) => {
-  const charCode = letter.charCodeAt(0);
+export const getColor = (number: number) => {
+  // const charCode = letter.charCodeAt(0);
 
   const colors = {
     1042: {
@@ -47,7 +47,7 @@ export const getAvatarColor = (letter: string) => {
   for (let key in colors) {
     const keyInNumber = Number(key) as keyof typeof colors;
 
-    if (charCode < keyInNumber) {
+    if (number < keyInNumber) {
       return colors[keyInNumber];
     }
   }

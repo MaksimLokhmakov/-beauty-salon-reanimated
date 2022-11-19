@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 
 const { width } = Dimensions.get("window");
 
-type Variant = "default" | "primary" | "transparent";
+type Variant = "default" | "primary" | "transparent" | "primaryLight";
 
 interface ButtonProps {
   label?: string;
@@ -34,6 +34,10 @@ const Button = ({ label, variant, onPress, children }: ButtonProps) => {
       primary: { backgroundColor: colors.primary, color: colors.white },
       transparent: { backgroundColor: "transparent", color: colors.secondary },
       default: { backgroundColor: colors.grey, color: colors.secondary },
+      primaryLight: {
+        backgroundColor: colors.primaryLight,
+        color: colors.primary,
+      },
     };
 
     return variants[variant] || variants.default;

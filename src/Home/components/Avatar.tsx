@@ -1,5 +1,5 @@
 import { Box, Text } from "../../components";
-import { getAvatarColor } from "../utils/getAvatarColor";
+import { getColor } from "../utils/getColor";
 
 export interface AvatarProps {
   name: string;
@@ -7,7 +7,7 @@ export interface AvatarProps {
 }
 
 const Avatar = ({ name, size }: AvatarProps) => {
-  const { backgroundColor, color } = getAvatarColor(name);
+  const { backgroundColor, color } = getColor(name.charCodeAt(0));
   const firstLetters =
     name.split(" ")[0].slice(0, 1) + name.split(" ")[1].slice(0, 1);
 

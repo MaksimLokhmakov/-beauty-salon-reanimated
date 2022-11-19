@@ -1,5 +1,5 @@
 import Animated, {
-  SharedValue,
+  runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
@@ -19,29 +19,36 @@ const AnimatedBox = Animated.createAnimatedComponent(Box);
 interface SwipeProps extends Pick<InfoBoxProps, "simultaneousHandlers"> {
   right: ReactNode;
   children: ReactNode;
-  translateX: SharedValue<number>;
+  onDelete: () => void;
 }
 
 const Swipe = ({
   simultaneousHandlers,
   right,
   children,
-  translateX,
+  onDelete,
 }: SwipeProps) => {
+  const translateX = useSharedValue(0);
   const itemHeight = useSharedValue(INFO_BOX_HEIGHT);
   const itemOpacity = useSharedValue(1);
+  const iconOpacity = useSharedValue(0);
 
   const panGesture = useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
     onActive: (e) => {
-      translateX.value = e.translationX < 0 ? e.translationX : 0;
+      if (e.translationX < 0) translateX.value = e.translationX;
+
+      if (-translateX.value > INFO_BOX_HEIGHT) {
+        return (iconOpacity.value = withTiming(1));
+      }
+
+      iconOpacity.value = withTiming(0);
     },
     onEnd: () => {
-      const shouldBeDeleted = -translateX.value > INFO_BOX_HEIGHT * 1.5;
-
-      if (shouldBeDeleted) {
+      if (-translateX.value > INFO_BOX_HEIGHT) {
         translateX.value = withTiming(-INFO_BOX_WIDTH);
         itemHeight.value = withTiming(0);
-        itemOpacity.value = withTiming(0);
+        iconOpacity.value = withTiming(0, { duration: 100 });
+        itemOpacity.value = withTiming(0, undefined, runOnJS(onDelete));
       } else {
         translateX.value = withTiming(0);
       }
@@ -57,6 +64,10 @@ const Swipe = ({
     opacity: itemOpacity.value,
   }));
 
+  const rightContentStyle = useAnimatedStyle(() => {
+    return { opacity: iconOpacity.value };
+  });
+
   return (
     <AnimatedBox
       width={INFO_BOX_WIDTH}
@@ -64,7 +75,9 @@ const Swipe = ({
       backgroundColor="white"
       style={infoBoxConteinerStyle}
     >
-      {right}
+      <AnimatedBox position="absolute" right={0} style={rightContentStyle}>
+        {right}
+      </AnimatedBox>
 
       <PanGestureHandler
         onGestureEvent={panGesture}

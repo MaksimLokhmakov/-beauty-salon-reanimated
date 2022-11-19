@@ -14,7 +14,7 @@ const theme = {
     text: "rgba(12, 13, 52, 0.7)",
     white: "white",
     grey: "rgba(12, 13, 52, 0.05)",
-    darkGrey: "#8a8d9a",
+    darkGrey: "#808080",
     danger: "#ff0058",
     primaryLight: "#e7f9f7",
     yellow: "#f4c742",
@@ -28,6 +28,7 @@ const theme = {
     m: 16,
     l: 24,
     xl: 40,
+    xxl: 50,
   },
   borderRadii: {
     0: 0,

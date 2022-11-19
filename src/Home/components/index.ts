@@ -4,6 +4,7 @@ export { default as SearchBar, SEARCH_HEIGHT } from "./SearchBar";
 export { default as ScrollView } from "./ScrollView";
 export { default as SearchResult } from "./SearchResult";
 export { default as InfoBox } from "./InfoBox";
+export { default as SectionHeader } from "./SectionHeader";
 export {
   default as HeaderWithSearch,
   HEADER_WITH_SEARCH_HEIGHT,

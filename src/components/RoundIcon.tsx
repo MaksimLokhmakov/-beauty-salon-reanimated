@@ -12,6 +12,8 @@ export type RoundIconName =
   | "clock"
   | "settings"
   | "arrow-left"
+  | "arrow-right"
+  | "chevron-right"
   | "menu"
   | "plus"
   | "phone"
