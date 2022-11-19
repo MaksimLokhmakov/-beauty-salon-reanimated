@@ -13,22 +13,37 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 
 const DRAWER_ICON_SIZE = largeDevice ? 36 : 30;
 
-export interface DrawerItemProps {
+interface BaseDrawerItem {
   label: string;
   color: string;
   icon: RoundIconName;
+}
+
+interface ScreenDrawerItem extends BaseDrawerItem {
   screen: keyof HomeRoutes;
 }
 
-const DrawerItem = ({ screen, label, color, icon }: DrawerItemProps) => {
+interface OnPressDrawerItem extends BaseDrawerItem {
+  onPress: (
+    navigation: DrawerNavigationProp<HomeRoutes, any, undefined>
+  ) => void;
+}
+
+export type DrawerItemProps = ScreenDrawerItem | OnPressDrawerItem;
+
+const DrawerItem = ({ label, color, icon, ...props }: DrawerItemProps) => {
   const navigation =
-    useNavigation<DrawerNavigationProp<HomeRoutes, typeof screen>>();
+    useNavigation<DrawerNavigationProp<HomeRoutes, "Masters">>();
   const theme = useTheme();
   const iconSize = largeDevice ? DRAWER_ICON_SIZE / 2 : DRAWER_ICON_SIZE / 2.5;
 
   return (
     <RectButton
-      onPress={() => navigation.navigate(screen)}
+      onPress={() =>
+        "screen" in props
+          ? navigation.navigate(props.screen)
+          : props.onPress(navigation)
+      }
       style={{
         borderRadius: theme.borderRadii.l,
       }}

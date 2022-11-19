@@ -1,14 +1,10 @@
 import { StyleSheet } from "react-native";
-import Animated, {
-  interpolate,
-  useAnimatedStyle,
-} from "react-native-reanimated";
+import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import { Box, Text, useTheme } from "../../../../components/Theme";
 import { STEP } from "./Graph";
 import { lerp } from "../../../utils/lerp";
 import { PADDING } from "./Graph";
 import { SharedValue } from "react-native-reanimated";
-import { getTopValue } from "./helpers";
 
 interface UnderlayProps {
   minY: number;
@@ -34,7 +30,7 @@ const Underlay = ({ maxY, minY, dates, x }: UnderlayProps) => {
   });
 
   return (
-    <Box style={StyleSheet.absoluteFill} justifyContent="flex-end">
+    <AnimatedBox style={StyleSheet.absoluteFill} justifyContent="flex-end">
       <Box flex={1} alignItems="flex-start" justifyContent="space-between">
         {([1, 0.75, 0.5, 0.25, 0] as (keyof typeof TOP_VALUES)[]).map(
           (progress) => (
@@ -83,7 +79,7 @@ const Underlay = ({ maxY, minY, dates, x }: UnderlayProps) => {
           })}
         </AnimatedBox>
       </Box>
-    </Box>
+    </AnimatedBox>
   );
 };
 

@@ -17,7 +17,8 @@ export type RoundIconName =
   | "menu"
   | "plus"
   | "phone"
-  | "trash-2";
+  | "trash-2"
+  | "log-out";
 export interface RoundIconProps {
   size: number;
   iconSize?: number;

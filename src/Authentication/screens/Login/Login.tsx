@@ -10,6 +10,7 @@ import { Footer } from "../../components";
 import { AuthNavigationProps } from "../../../components/Navigation";
 import { getAllErrors } from "../../utils/getAllErrors";
 import * as Yup from "yup";
+import { CommonActions } from "@react-navigation/native";
 
 const LoginSchema = Yup.object().shape({
   phone: Yup.string()
@@ -36,7 +37,13 @@ const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
   } = useFormik({
     initialValues: { phone: "", password: "", remember: false },
     validationSchema: LoginSchema,
-    onSubmit: () => navigation.navigate("Home"),
+    onSubmit: () =>
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "Home" }],
+        })
+      ),
   });
 
   const footer = (

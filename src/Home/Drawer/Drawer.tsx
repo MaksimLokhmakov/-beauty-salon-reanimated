@@ -6,7 +6,11 @@ import DrawerAvatar from "./DrawerAvatar";
 import { Header } from "../components";
 import theme from "../../components/Theme";
 import React from "react";
-import { DrawerActions, useNavigation } from "@react-navigation/native";
+import {
+  CommonActions,
+  DrawerActions,
+  useNavigation,
+} from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 const shiftBottom = -1 * (largeDevice ? height / 6000 : height / 6000);
@@ -52,12 +56,18 @@ const items: DrawerItemProps[] = [
     screen: "Options",
     color: theme.colors.pink,
   },
-  // {
-  //   icon: "arrow-left",
-  //   label: "Выход",
-  //   screen: "Welcome",
-  //   color: theme.colors.black,
-  // },
+  {
+    icon: "log-out",
+    label: "Выход",
+    color: theme.colors.black,
+    onPress: (navigation) =>
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: "Authentication" }],
+        })
+      ),
+  },
 ];
 
 const Drawer = () => {
@@ -129,7 +139,7 @@ const Drawer = () => {
 
             <Box style={{ marginTop: largeDevice ? 0 : 100 }}>
               {items.map((item) => (
-                <DrawerItem key={item.screen} {...item} />
+                <DrawerItem key={item.icon} {...item} />
               ))}
             </Box>
           </Box>

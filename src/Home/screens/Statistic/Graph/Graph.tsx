@@ -1,8 +1,11 @@
-import { memo } from "react";
+import { memo, useLayoutEffect, useRef } from "react";
 import { Dimensions } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,
+  Transitioning,
+  Transition,
+  TransitioningView,
 } from "react-native-reanimated";
 import { Box } from "../../../../components";
 import { useTheme } from "../../../../components";
@@ -12,6 +15,16 @@ import Underlay from "./Underlay";
 const { width: wWidth } = Dimensions.get("window");
 export const STEP = 40;
 const aspectRatio = 195 / 305;
+const transition = (
+  <Transition.Together>
+    <Transition.In type="fade" durationMs={500} interpolation="easeInOut" />
+    <Transition.In
+      type="slide-bottom"
+      durationMs={650}
+      interpolation="easeInOut"
+    />
+  </Transition.Together>
+);
 
 type Point = {
   value: number;
@@ -27,11 +40,12 @@ export const PADDING = "xxl";
 
 const Graph = ({ data }: GraphProps) => {
   const theme = useTheme();
+  const points = useRef<TransitioningView>(null);
   const x = useSharedValue(0);
 
   const canvasWidth = wWidth - theme.spacing.m * 2;
   const canvasHeight = canvasWidth * aspectRatio;
-  // const width = canvasWidth - theme.spacing[PADDING];
+  const width = data.length * STEP;
   const height = canvasHeight - theme.spacing[PADDING];
   const values = data.map(({ value }) => value);
   const dates = data.map(({ date }) => date);
@@ -39,6 +53,11 @@ const Graph = ({ data }: GraphProps) => {
   // const maxX = Math.max(...dates);
   const minY = Math.min(...values);
   const maxY = Math.max(...values);
+
+  useLayoutEffect(() => {
+    "native";
+    points.current?.animateNextTransition();
+  }, [data]);
 
   const onScroll = useAnimatedScrollHandler((e) => {
     x.value = e.contentOffset.x;
@@ -60,7 +79,11 @@ const Graph = ({ data }: GraphProps) => {
           showsHorizontalScrollIndicator={false}
           {...{ onScroll }}
         >
-          <Box width={data.length * STEP}>
+          <Transitioning.View
+            ref={points}
+            {...{ transition }}
+            style={{ width, height }}
+          >
             {data.map((point, i) => {
               if (point.value === 0) {
                 return null;
@@ -98,7 +121,7 @@ const Graph = ({ data }: GraphProps) => {
                 </Box>
               );
             })}
-          </Box>
+          </Transitioning.View>
         </Animated.ScrollView>
       </Box>
     </Box>
