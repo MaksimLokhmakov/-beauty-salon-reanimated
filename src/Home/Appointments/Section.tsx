@@ -4,13 +4,13 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-import { Box } from "../../../components";
-import { InfoBox, SectionHeader } from "../../components";
+import { Box } from "../../components";
+import { InfoBox, SectionHeader } from "../components";
 
-import { getDuration } from "../../utils/getDuration";
+import { getDuration } from "../utils/getDuration";
 
 // ? temp
-import { AppointmentType } from "../../utils/temp";
+import { AppointmentType } from "../utils/temp";
 
 const AnimatedBox = Animated.createAnimatedComponent(Box);
 

@@ -43,7 +43,7 @@ const Underlay = ({ maxY, minY, dates, x }: UnderlayProps) => {
               <Box width={theme.spacing[PADDING]} height={ROW_HIGHT}>
                 <Text
                   variant="body"
-                  fontSize={14}
+                  fontSize={12}
                   textAlign="right"
                   marginRight="s"
                 >
@@ -71,7 +71,7 @@ const Underlay = ({ maxY, minY, dates, x }: UnderlayProps) => {
 
             return (
               <Box key={date} width={STEP}>
-                <Text variant="body" fontSize={14}>
+                <Text variant="body" fontSize={12}>
                   {cDate}
                 </Text>
               </Box>

@@ -10,9 +10,8 @@ import Animated, {
 } from "react-native-reanimated";
 import Slide, { SLIDE_HEIGHT } from "./Slide";
 import Subslide from "./Subslide";
-import Dot from "./Dot";
 import { AuthNavigationProps } from "../../../components/Navigation";
-import { useTheme, Box, largeDevice } from "../../../components";
+import { useTheme, Box, largeDevice, Dot } from "../../../components";
 
 const { width, height: windowHeight } = Dimensions.get("window");
 

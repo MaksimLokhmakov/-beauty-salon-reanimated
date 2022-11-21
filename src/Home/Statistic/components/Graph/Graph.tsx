@@ -1,70 +1,77 @@
-import { memo, useLayoutEffect, useRef } from "react";
+import { memo, useLayoutEffect } from "react";
 import { Dimensions } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,
-  Transitioning,
-  Transition,
-  TransitioningView,
+  useAnimatedStyle,
+  withTiming,
 } from "react-native-reanimated";
-import { Box } from "../../../../components";
-import { useTheme } from "../../../../components";
+import { Box, useTheme } from "../../../../components";
 import { lerp } from "../../../utils/lerp";
 import Underlay from "./Underlay";
+import moment from "moment";
 
 const { width: wWidth } = Dimensions.get("window");
 export const STEP = 40;
+export const PADDING = "xxl";
 const aspectRatio = 195 / 305;
-const transition = (
-  <Transition.Together>
-    <Transition.In type="fade" durationMs={500} interpolation="easeInOut" />
-    <Transition.In
-      type="slide-bottom"
-      durationMs={650}
-      interpolation="easeInOut"
-    />
-  </Transition.Together>
-);
 
-type Point = {
+export type PointType = {
   value: number;
-  date: number | string;
+  date: Date;
   color: string;
 };
 
 interface GraphProps {
-  data: Point[];
+  data: PointType[];
+  datesPresentetionVariant: "month" | "year" | "full";
 }
 
-export const PADDING = "xxl";
-
-const Graph = ({ data }: GraphProps) => {
+const Graph = ({ data, datesPresentetionVariant }: GraphProps) => {
   const theme = useTheme();
-  const points = useRef<TransitioningView>(null);
   const x = useSharedValue(0);
 
   const canvasWidth = wWidth - theme.spacing.m * 2;
   const canvasHeight = canvasWidth * aspectRatio;
-  const width = data.length * STEP;
+  const width = canvasWidth - theme.spacing[PADDING];
   const height = canvasHeight - theme.spacing[PADDING];
   const values = data.map(({ value }) => value);
-  const dates = data.map(({ date }) => date);
+  const dates = data.map(({ date }) =>
+    moment(date).format(
+      datesPresentetionVariant === "full"
+        ? "YYYY"
+        : datesPresentetionVariant === "year"
+        ? "MMM"
+        : "DD"
+    )
+  );
   // const minX = Math.min(...dates);
   // const maxX = Math.max(...dates);
   const minY = Math.min(...values);
   const maxY = Math.max(...values);
 
-  useLayoutEffect(() => {
-    "native";
-    points.current?.animateNextTransition();
-  }, [data]);
-
   const onScroll = useAnimatedScrollHandler((e) => {
     x.value = e.contentOffset.x;
   });
 
+  const pointsConteinerOpacity = useSharedValue(0);
+  const pointsConteinerTranslateY = useSharedValue(height);
+
+  const pointsConteinerStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: pointsConteinerTranslateY.value }],
+    opacity: pointsConteinerOpacity.value,
+  }));
+
+  useLayoutEffect(() => {
+    pointsConteinerTranslateY.value = withTiming(0, {
+      duration: 650,
+    });
+    pointsConteinerOpacity.value = withTiming(1, { duration: 300 });
+  }, []);
+
   return (
     <Box
+      width={canvasWidth}
       height={canvasHeight}
       paddingLeft={PADDING}
       paddingBottom={PADDING}
@@ -72,17 +79,19 @@ const Graph = ({ data }: GraphProps) => {
     >
       <Underlay {...{ minY, maxY, dates, x }} />
 
-      <Box {...{ height }}>
+      <Box {...{ height, width }}>
         <Animated.ScrollView
           horizontal
           scrollEventThrottle={16}
+          bounces={false}
           showsHorizontalScrollIndicator={false}
           {...{ onScroll }}
         >
-          <Transitioning.View
-            ref={points}
-            {...{ transition }}
-            style={{ width, height }}
+          <Animated.View
+            style={[
+              { width: data.length * STEP, height },
+              pointsConteinerStyle,
+            ]}
           >
             {data.map((point, i) => {
               if (point.value === 0) {
@@ -91,7 +100,7 @@ const Graph = ({ data }: GraphProps) => {
 
               return (
                 <Box
-                  key={point.date}
+                  key={point.date.toString()}
                   position="absolute"
                   left={i * STEP}
                   bottom={0}
@@ -121,7 +130,7 @@ const Graph = ({ data }: GraphProps) => {
                 </Box>
               );
             })}
-          </Transitioning.View>
+          </Animated.View>
         </Animated.ScrollView>
       </Box>
     </Box>

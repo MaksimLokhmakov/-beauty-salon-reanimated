@@ -291,6 +291,159 @@ export const graphDataMonths = [
   },
 ];
 
+export const graphClientsPerDayDataMonths = [
+  {
+    value: 15,
+    date: new Date("2022-11-01T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 17,
+    date: new Date("2022-11-02T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 19,
+    date: new Date("2022-11-03T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 7,
+    date: new Date("2022-11-04T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 0,
+    date: new Date("2022-11-05T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 10,
+    date: new Date("2022-11-06T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 12,
+    date: new Date("2022-11-07T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 11,
+    date: new Date("2022-11-08T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 13,
+    date: new Date("2022-11-09T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 9,
+    date: new Date("2022-11-10T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 8,
+    date: new Date("2022-11-11T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 16,
+    date: new Date("2022-11-12T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 17,
+    date: new Date("2022-11-13T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 19,
+    date: new Date("2022-11-14T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 20,
+    date: new Date("2022-11-15T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 21,
+    date: new Date("2022-11-16T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 13,
+    date: new Date("2022-11-17T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 10,
+    date: new Date("2022-11-18T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 4,
+    date: new Date("2022-11-19T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 8,
+    date: new Date("2022-11-20T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 0,
+    date: new Date("2022-11-21T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 0,
+    date: new Date("2022-11-22T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 0,
+    date: new Date("2022-11-23T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 14,
+    date: new Date("2022-11-24T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 15,
+    date: new Date("2022-11-25T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 14,
+    date: new Date("2022-11-26T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 13,
+    date: new Date("2022-11-27T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 16,
+    date: new Date("2022-11-28T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 17,
+    date: new Date("2022-11-29T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 19,
+    date: new Date("2022-11-30T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+];
+
 export const graphDataYear = [
   {
     value: 5529,
@@ -350,6 +503,145 @@ export const graphDataYear = [
   {
     value: 0,
     date: new Date("2022-12-12T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+];
+
+export const graphClientsPerYearData = [
+  {
+    value: 61,
+    date: new Date("2022-01-02T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 81,
+    date: new Date("2022-02-03T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 61,
+    date: new Date("2022-03-04T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 49,
+    date: new Date("2022-04-05T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 40,
+    date: new Date("2022-05-06T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 93,
+    date: new Date("2022-06-07T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 30,
+    date: new Date("2022-07-08T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 79,
+    date: new Date("2022-08-09T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 86,
+    date: new Date("2022-09-10T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 103,
+    date: new Date("2022-10-11T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 78,
+    date: new Date("2022-11-12T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 96,
+    date: new Date("2022-12-12T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+];
+
+export const graphDataFull = [
+  {
+    value: 95293,
+    date: new Date("2017-01-02T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 72393,
+    date: new Date("2018-01-02T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 100102,
+    date: new Date("2019-02-03T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 112082,
+    date: new Date("2020-03-04T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 97200,
+    date: new Date("2021-04-05T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 75000,
+    date: new Date("2022-04-05T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 0,
+    date: new Date("2023-04-05T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+];
+
+export const graphClientsPerFullData = [
+  {
+    value: 814,
+    date: new Date("2017-01-02T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 618,
+    date: new Date("2018-01-02T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 897,
+    date: new Date("2019-02-03T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 921,
+    date: new Date("2020-03-04T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 749,
+    date: new Date("2021-04-05T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 801,
+    date: new Date("2022-04-05T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 0,
+    date: new Date("2023-04-05T11:00:00.061Z"),
     color: getColor(randomInteger(1042, 1071)).color,
   },
 ];

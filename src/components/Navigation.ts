@@ -21,6 +21,13 @@ export interface HomeNavigationProps<RouteName extends keyof HomeRoutes> {
   route: RouteProp<HomeRoutes, RouteName>;
 }
 
+export interface StatisticNavigationProps<
+  RouteName extends keyof StatisticRoutes
+> {
+  navigation: DrawerNavigationProp<StatisticRoutes, RouteName>;
+  route: RouteProp<StatisticRoutes, RouteName>;
+}
+
 export type AuthenticationRoutes = {
   Onboarding: undefined;
   Welcome: undefined;
@@ -28,6 +35,14 @@ export type AuthenticationRoutes = {
   SignUp: undefined;
   ForgotPassword: undefined;
   PasswordChanged: undefined;
+};
+
+export type StatisticRoutes = {
+  Current: undefined;
+  Full: undefined;
+  Year: undefined;
+  Month: undefined;
+  Day: undefined;
 };
 
 export type HomeRoutes = {

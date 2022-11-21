@@ -1,16 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import { useSharedValue } from "react-native-reanimated";
-import { Box } from "../../../components";
-import { HeaderWithSearch, ScrollView, SearchResult } from "../../components";
-import { HomeNavigationProps } from "../../../components/Navigation";
+import { Box } from "../../components";
+import { HeaderWithSearch, ScrollView, SearchResult } from "../components";
+import { HomeNavigationProps } from "../../components/Navigation";
 import { useCallback, useRef, useState } from "react";
 import { ScrollView as GHScrollView } from "react-native-gesture-handler";
 import Section from "./Section";
-import { getDuration } from "../../utils/getDuration";
+import { getDuration } from "../utils/getDuration";
 
 // ? temp
-import { AppointmentType } from "../../utils/temp";
-import { appointments as cAppointments } from "../../utils/temp";
+import { AppointmentType } from "../utils/temp";
+import { appointments as cAppointments } from "../utils/temp";
 
 const Appointments = ({ navigation }: HomeNavigationProps<"Appointments">) => {
   const [appointments, setAppointments] = useState(cAppointments);
