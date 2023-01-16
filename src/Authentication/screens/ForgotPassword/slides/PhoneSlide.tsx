@@ -1,6 +1,6 @@
 import { Dimensions, TextInputProps as RNTextInputProps } from "react-native";
 import { Box, Text, TextInput, Button } from "../../../../components";
-import { phoneInputMask } from "../../../utils/consts";
+import { phoneInputMask } from "../../../../helpers/consts";
 
 const { width } = Dimensions.get("window");
 

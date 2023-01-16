@@ -24,6 +24,7 @@ const theme = {
     black: "#0a0b35",
   },
   spacing: {
+    0: 0,
     s: 8,
     m: 16,
     l: 24,

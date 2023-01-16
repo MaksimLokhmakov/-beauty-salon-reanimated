@@ -3,12 +3,12 @@ import { BorderlessButton } from "react-native-gesture-handler";
 import { TextInput, Checkbox } from "../../../components/Form";
 import { Box, Text } from "../../../components/Theme";
 import { Button, Conteiner } from "../../../components";
-import { phoneInputMask } from "../../utils/consts";
+import { phoneInputMask } from "../../../helpers/consts";
 import { useRef } from "react";
 import { useFormik } from "formik";
 import { Footer } from "../../components";
 import { AuthNavigationProps } from "../../../components/Navigation";
-import { getAllErrors } from "../../utils/getAllErrors";
+import { getAllErrors } from "../../../helpers";
 import * as Yup from "yup";
 import { CommonActions } from "@react-navigation/native";
 

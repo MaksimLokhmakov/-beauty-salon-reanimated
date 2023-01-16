@@ -47,6 +47,7 @@ const ScrollView = forwardRef<GHScrollView, ScrollViewProps>(
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingTop: HEADER_WITH_SEARCH_HEIGHT + insets.top,
+          paddingBottom: insets.bottom,
         }}
         {...{ onScroll, onScrollEndDrag }}
       >

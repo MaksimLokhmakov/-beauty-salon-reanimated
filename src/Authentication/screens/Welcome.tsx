@@ -57,7 +57,7 @@ const Welcome = ({ navigation }: AuthNavigationProps<"Welcome">) => {
             onPress={() => navigation.navigate("Login")}
           />
           <Button
-            label="Регестрация"
+            label="Регистрация"
             onPress={() => navigation.navigate("SignUp")}
           />
           <Button

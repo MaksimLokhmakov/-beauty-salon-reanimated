@@ -6,3 +6,4 @@ export { TextInput, ConfirmationCodeField } from "./Form";
 export { default as RoundIconButton } from "./RoundIconButton";
 export { default as RoundIcon, RoundIconName } from "./RoundIcon";
 export { default as Dot } from "./Dot";
+export { default as Switch } from "./Switch";

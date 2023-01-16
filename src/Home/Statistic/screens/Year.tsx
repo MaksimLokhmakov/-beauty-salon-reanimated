@@ -1,9 +1,9 @@
-import { FlatList } from "react-native";
+import { FlatList, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { StatisticNavigationProps } from "../../../components/Navigation";
 import { Box } from "../../../components";
-import { Graph, GraphsSlider, Point, Subheader } from "../components";
+import { GraphsSlider, Point } from "../components";
 
 // * temp
 import { graphDataYear, graphClientsPerYearData } from "../../utils/temp";
@@ -14,14 +14,16 @@ const Year = ({ navigation }: StatisticNavigationProps<"Year">) => {
   const insets = useSafeAreaInsets();
 
   const points = graphDataYear.map(({ value, ...ext }, index) => {
-    const cValue = `Прибыль: ${value} руб., Клиентов: ${graphClientsPerYearData[index].value}`;
-
-    return { value: cValue, ...ext };
+    return {
+      income: value,
+      clients: graphClientsPerYearData[index].value,
+      ...ext,
+    };
   });
 
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style={Platform.OS === "ios" ? "light" : "dark"} />
 
       <Box flex={1} backgroundColor="white" paddingTop="m">
         <GraphsSlider
@@ -35,13 +37,13 @@ const Year = ({ navigation }: StatisticNavigationProps<"Year">) => {
         <FlatList
           data={points}
           keyExtractor={(item) => item.date.toString()}
-          renderItem={({ item: { value, color, date } }) =>
-            value ? (
+          renderItem={({ item: { income, clients, color, date } }) =>
+            clients ? (
               <Point
                 key={date.toString()}
                 mode="year"
-                onPress={() => navigation.navigate("Month")}
-                {...{ value, date, color }}
+                onPress={() => navigation.navigate("Month", {})}
+                {...{ income, clients, date, color }}
               />
             ) : null
           }

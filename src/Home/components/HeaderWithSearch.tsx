@@ -79,7 +79,6 @@ const HeaderWithSearch = ({
       borderBottomColor="grey"
       borderBottomWidth={1}
       zIndex={10}
-      elevation={10}
       style={[
         { paddingBottom: HEADER_WITH_SEARCH_PADDING_BOTTOM },
         scrollСonteinerStyle,

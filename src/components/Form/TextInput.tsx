@@ -2,15 +2,24 @@ import {
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
 } from "react-native";
+import { memo } from "react";
 import theme, { Box } from "../Theme";
 import RoundIcon from "../RoundIcon";
 import { Feather as Icon } from "@expo/vector-icons";
 import { forwardRef } from "react";
 import MaskInput from "react-native-mask-input";
 
-type iconNameType = "phone" | "lock" | "user" | "message-circle";
+type iconNameType =
+  | "phone"
+  | "lock"
+  | "user"
+  | "message-circle"
+  | "users"
+  | "percent"
+  | "clock"
+  | "dollar-sign";
 
-interface TextInputProps extends RNTextInputProps {
+export interface TextInputProps extends RNTextInputProps {
   icon?: iconNameType;
   error?: string;
   touched?: boolean;
@@ -69,4 +78,4 @@ const TextInput = forwardRef<RNTextInput, TextInputProps>(
   }
 );
 
-export default TextInput;
+export default memo(TextInput);

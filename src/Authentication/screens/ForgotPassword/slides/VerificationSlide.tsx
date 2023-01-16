@@ -5,7 +5,6 @@ import {
 } from "react-native";
 import { Box, Text, Button, useTheme, RoundIcon } from "../../../../components";
 import ConfirmationCodeField from "../../../../components/Form/ConfirmationCodeField";
-import { Feather as Icon } from "@expo/vector-icons";
 import { forwardRef } from "react";
 
 const { width } = Dimensions.get("window");

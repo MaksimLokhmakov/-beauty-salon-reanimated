@@ -18,7 +18,17 @@ export type RoundIconName =
   | "plus"
   | "phone"
   | "trash-2"
-  | "log-out";
+  | "log-out"
+  | "arrow-left"
+  | "arrow-right"
+  | "edit"
+  | "calendar"
+  | "dollar-sign"
+  | "speaker"
+  | "pocket"
+  | "pen-tool"
+  | "pie-chart";
+
 export interface RoundIconProps {
   size: number;
   iconSize?: number;

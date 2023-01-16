@@ -1,5 +1,4 @@
-import { getColor } from "./getColor";
-import { randomInteger } from "./randomInteger";
+import { getColor, randomInteger } from "./helpers";
 
 export type ClientType = {
   name: string;
@@ -7,54 +6,12 @@ export type ClientType = {
 };
 
 export const clients: ClientType[] = [
-  { name: "Максим Лохмаков", phone: "+375 25 231-92-01" },
-  { name: "Денис Никифоров", phone: "+375 22 111-49-32" },
   { name: "Илья Соболев", phone: "+375 25 622-91-77" },
   { name: "Дима Иванович", phone: "+375 25 981-41-20" },
-  { name: "Елена Кухарева", phone: "+375 25 121-12-54" },
-  { name: "Алина Маслинекова", phone: "+375 25 826-90-10" },
-  { name: "Екатерина Фламинго", phone: "+375 25 851-03-00" },
-  { name: "Аня Петрович", phone: "+375 25 111-20-13" },
-  { name: "Вита Прайонис", phone: "+375 25 391-20-39" },
-  { name: "Соня Лук", phone: "+375 25 331-95-00" },
-  { name: "Максим Поливода", phone: "+375 25 622-33-00" },
-  { name: "Денис Вишнев", phone: "+375 25 621-95-33" },
-  { name: "Илья Крутько", phone: "+375 25 987-12-34" },
-  { name: "Дима Соловей", phone: "+375 25 693-95-22" },
-  { name: "Елена Демочка", phone: "+375 25 691-94-20" },
-  { name: "Алина Петрович", phone: "+375 25 694-14-56" },
   { name: "Максим Лохмаков", phone: "+375 25 231-92-01" },
   { name: "Денис Никифоров", phone: "+375 22 111-49-32" },
-  { name: "Илья Соболев", phone: "+375 25 622-91-77" },
-  { name: "Дима Иванович", phone: "+375 25 981-41-20" },
   { name: "Елена Кухарева", phone: "+375 25 121-12-54" },
   { name: "Алина Маслинекова", phone: "+375 25 826-90-10" },
-  { name: "Екатерина Фламинго", phone: "+375 25 851-03-00" },
-  { name: "Аня Петрович", phone: "+375 25 111-20-13" },
-  { name: "Вита Прайонис", phone: "+375 25 391-20-39" },
-  { name: "Соня Лук", phone: "+375 25 331-95-00" },
-  { name: "Максим Поливода", phone: "+375 25 622-33-00" },
-  { name: "Денис Вишнев", phone: "+375 25 621-95-33" },
-  { name: "Илья Крутько", phone: "+375 25 987-12-34" },
-  { name: "Дима Соловей", phone: "+375 25 693-95-22" },
-  { name: "Елена Демочка", phone: "+375 25 691-94-20" },
-  { name: "Алина Петрович", phone: "+375 25 694-14-56" },
-  { name: "Максим Лохмаков", phone: "+375 25 231-92-01" },
-  { name: "Денис Никифоров", phone: "+375 22 111-49-32" },
-  { name: "Илья Соболев", phone: "+375 25 622-91-77" },
-  { name: "Дима Иванович", phone: "+375 25 981-41-20" },
-  { name: "Елена Кухарева", phone: "+375 25 121-12-54" },
-  { name: "Алина Маслинекова", phone: "+375 25 826-90-10" },
-  { name: "Екатерина Фламинго", phone: "+375 25 851-03-00" },
-  { name: "Аня Петрович", phone: "+375 25 111-20-13" },
-  { name: "Вита Прайонис", phone: "+375 25 391-20-39" },
-  { name: "Соня Лук", phone: "+375 25 331-95-00" },
-  { name: "Максим Поливода", phone: "+375 25 622-33-00" },
-  { name: "Денис Вишнев", phone: "+375 25 621-95-33" },
-  { name: "Илья Крутько", phone: "+375 25 987-12-34" },
-  { name: "Дима Соловей", phone: "+375 25 693-95-22" },
-  { name: "Елена Демочка", phone: "+375 25 691-94-20" },
-  { name: "Алина Петрович", phone: "+375 25 694-14-56" },
 ];
 
 export type MasterType = {
@@ -69,20 +26,13 @@ export const masters: MasterType[] = [
   { name: "Илья Соболев", phone: "+375 25 622-91-77", percent: 0.15 },
   { name: "Дима Иванович", phone: "+375 25 981-41-20", percent: 0.14 },
   { name: "Елена Кухарева", phone: "+375 25 121-12-54", percent: 0.12 },
-  { name: "Алина Маслинекова", phone: "+375 25 826-90-10", percent: 0.19 },
-  { name: "Екатерина Фламинго", phone: "+375 25 851-03-00", percent: 0.17 },
-  { name: "Аня Петрович", phone: "+375 25 111-20-13", percent: 0.15 },
-  { name: "Вита Прайонис", phone: "+375 25 391-20-39", percent: 0.14 },
-  { name: "Соня Лук", phone: "+375 25 331-95-00", percent: 0.13 },
-  { name: "Максим Поливода", phone: "+375 25 622-33-00", percent: 0.27 },
-  { name: "Денис Вишнев", phone: "+375 25 621-95-33", percent: 0.25 },
-  { name: "Илья Крутько", phone: "+375 25 987-12-34", percent: 0.3 },
-  { name: "Дима Соловей", phone: "+375 25 693-95-22", percent: 0.09 },
-  { name: "Елена Демочка", phone: "+375 25 691-94-20", percent: 0.12 },
-  { name: "Алина Петрович", phone: "+375 25 694-14-56", percent: 0.15 },
-  { name: "Аня Саванович", phone: "+375 25 623-76-22", percent: 0.1 },
-  { name: "Виолетта Козырицкая", phone: "+375 25 615-00-00", percent: 0.2 },
-  { name: "Соня Юла", phone: "+375 25 691-95-00", percent: 0.22 },
+];
+
+export const patternOption = [
+  { id: 0, pattern: require("../../../assets/patterns/1.jpg") },
+  { id: 1, pattern: require("../../../assets/patterns/2.jpg") },
+  { id: 2, pattern: require("../../../assets/patterns/3.jpg") },
+  { id: 3, pattern: require("../../../assets/patterns/4.jpg") },
 ];
 
 export type AppointmentType = {
@@ -91,6 +41,7 @@ export type AppointmentType = {
   master: string;
   start: Date;
   finish: Date;
+  price: number;
 };
 
 export const appointments: AppointmentType[] = [
@@ -100,6 +51,7 @@ export const appointments: AppointmentType[] = [
     master: "Тимур Батрудинов",
     start: new Date("2022-11-17T15:00:00.061Z"),
     finish: new Date("2022-11-17T16:00:00.061Z"),
+    price: 60,
   },
   {
     id: "ww",
@@ -107,6 +59,7 @@ export const appointments: AppointmentType[] = [
     master: "Андрей Алексеев",
     start: new Date("2022-11-19T16:00:00.061Z"),
     finish: new Date("2022-11-19T17:00:00.061Z"),
+    price: 80,
   },
   {
     id: "ee",
@@ -114,6 +67,7 @@ export const appointments: AppointmentType[] = [
     master: "Тимур Батрудинов",
     start: new Date("2022-11-17T17:00:00.061Z"),
     finish: new Date("2022-11-17T18:00:00.061Z"),
+    price: 70,
   },
   {
     id: "rr",
@@ -121,6 +75,7 @@ export const appointments: AppointmentType[] = [
     master: "Тимур Батрудинов",
     start: new Date("2022-11-18T16:00:00.061Z"),
     finish: new Date("2022-11-18T17:00:00.061Z"),
+    price: 65,
   },
   {
     id: "tt",
@@ -128,6 +83,7 @@ export const appointments: AppointmentType[] = [
     master: "Андрей Алексеев",
     start: new Date("2022-11-19T13:00:00.061Z"),
     finish: new Date("2022-11-19T14:00:00.061Z"),
+    price: 85,
   },
   {
     id: "yy",
@@ -135,6 +91,7 @@ export const appointments: AppointmentType[] = [
     master: "Тимур Батрудинов",
     start: new Date("2022-11-18T11:00:00.061Z"),
     finish: new Date("2022-11-18T12:00:00.061Z"),
+    price: 96,
   },
 ];
 
@@ -245,7 +202,7 @@ export const graphDataMonths = [
     color: getColor(randomInteger(1042, 1071)).color,
   },
   {
-    value: 0,
+    value: 400,
     date: new Date("2022-11-22T11:00:00.061Z"),
     color: getColor(randomInteger(1042, 1071)).color,
   },
@@ -398,7 +355,7 @@ export const graphClientsPerDayDataMonths = [
     color: getColor(randomInteger(1042, 1071)).color,
   },
   {
-    value: 0,
+    value: 7,
     date: new Date("2022-11-22T11:00:00.061Z"),
     color: getColor(randomInteger(1042, 1071)).color,
   },
@@ -644,4 +601,170 @@ export const graphClientsPerFullData = [
     date: new Date("2023-04-05T11:00:00.061Z"),
     color: getColor(randomInteger(1042, 1071)).color,
   },
+];
+
+export const graphIncomePerHour = [
+  {
+    value: 35,
+    date: new Date("2022-11-01T09:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 0,
+    date: new Date("2022-11-01T10:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 80,
+    date: new Date("2022-11-01T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 55,
+    date: new Date("2022-11-01T12:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 75,
+    date: new Date("2022-11-01T13:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 25,
+    date: new Date("2022-11-01T14:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 40,
+    date: new Date("2022-11-01T15:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 95,
+    date: new Date("2022-11-01T16:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 170,
+    date: new Date("2022-11-01T17:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 70,
+    date: new Date("2022-11-01T18:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 85,
+    date: new Date("2022-11-01T19:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 65,
+    date: new Date("2022-11-01T20:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 145,
+    date: new Date("2022-11-01T21:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+];
+
+export const graphClientsPerHour = [
+  {
+    value: 1,
+    date: new Date("2022-11-01T09:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 0,
+    date: new Date("2022-11-01T10:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 2,
+    date: new Date("2022-11-01T11:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 1,
+    date: new Date("2022-11-01T12:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 4,
+    date: new Date("2022-11-01T13:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 1,
+    date: new Date("2022-11-01T14:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 1,
+    date: new Date("2022-11-01T15:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 2,
+    date: new Date("2022-11-01T16:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 3,
+    date: new Date("2022-11-01T17:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 2,
+    date: new Date("2022-11-01T18:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 2,
+    date: new Date("2022-11-01T19:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 1,
+    date: new Date("2022-11-01T20:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+  {
+    value: 3,
+    date: new Date("2022-11-01T21:00:00.061Z"),
+    color: getColor(randomInteger(1042, 1071)).color,
+  },
+];
+
+export const shadule = [
+  [{ master: masters[0], duration: "09:00 - 21:00" }],
+  [
+    { master: masters[0], duration: "09:00 - 19:00" },
+    { master: masters[1], duration: "11:00 - 21:00" },
+    { master: masters[2], duration: "10:00 - 20:00" },
+  ],
+  [
+    { master: masters[1], duration: "11:00 - 21:00" },
+    { master: masters[4], duration: "10:00 - 20:00" },
+  ],
+  [{ master: masters[4], duration: "11:00 - 21:00" }],
+  [
+    { master: masters[1], duration: "12:00 - 21:00" },
+    { master: masters[4], duration: "09:00 - 20:00" },
+  ],
+  [
+    { master: masters[2], duration: "12:00 - 21:00" },
+    { master: masters[3], duration: "09:00 - 20:00" },
+  ],
+  [
+    { master: masters[1], duration: "09:00 - 21:00" },
+    { master: masters[2], duration: "09:00 - 20:00" },
+  ],
+  [
+    { master: masters[1], duration: "09:00 - 21:00" },
+    { master: masters[2], duration: "09:00 - 20:00" },
+  ],
 ];

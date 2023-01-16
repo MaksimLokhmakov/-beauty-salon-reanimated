@@ -1,9 +1,7 @@
-import { StatusBar } from "expo-status-bar";
-import { Dimensions, Image, StyleSheet } from "react-native";
+import { Dimensions, Image, StyleSheet, Platform } from "react-native";
 import { Box, useTheme, largeDevice } from "../../components";
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
-import DrawerAvatar from "./DrawerAvatar";
-import { Header } from "../components";
+import { Header, HeaderConteiner, AvatarWithLabel } from "../components";
 import theme from "../../components/Theme";
 import React from "react";
 import {
@@ -15,6 +13,8 @@ import {
 const { width, height } = Dimensions.get("window");
 const shiftBottom = -1 * (largeDevice ? height / 6000 : height / 6000);
 const DRAWER_AVATAR_SIZE = 100;
+const ITEMS_CONTEINER_MARGING_TOP =
+  !largeDevice || Platform.OS === "android" ? 100 : 35;
 
 export const DRAWER_WIDTH = width * 0.8;
 export const assets = [require("../../../assets/patterns/1.jpg")];
@@ -53,7 +53,7 @@ const items: DrawerItemProps[] = [
   {
     icon: "settings",
     label: "Настройки",
-    screen: "Options",
+    screen: "Settings",
     color: theme.colors.pink,
   },
   {
@@ -77,29 +77,17 @@ const Drawer = () => {
 
   return (
     <>
-      <StatusBar style="light" />
-
       <Box flex={1} borderBottomRightRadius="xl" borderTopRightRadius="xl">
-        <Box flex={0.2}>
-          <Box
-            position="absolute"
-            top={0}
-            left={0}
-            right={0}
-            bottom={0}
-            backgroundColor="secondary"
-            borderBottomRightRadius="xl"
-          >
-            <Header
-              title="Меню"
-              left={{
-                icon: "x",
-                onPress: () => navigation.dispatch(DrawerActions.closeDrawer()),
-              }}
-              dark
-            />
-          </Box>
-        </Box>
+        <HeaderConteiner>
+          <Header
+            title="Меню"
+            left={{
+              icon: "x",
+              onPress: () => navigation.dispatch(DrawerActions.closeDrawer()),
+            }}
+            dark
+          />
+        </HeaderConteiner>
 
         <Box flex={0.8}>
           <Box flex={1} backgroundColor="secondary" />
@@ -130,14 +118,18 @@ const Drawer = () => {
               width={DRAWER_WIDTH}
               top={-DRAWER_AVATAR_SIZE / 2}
             >
-              <DrawerAvatar
+              <AvatarWithLabel
                 name="Максим Лохмаков"
                 phone="+375 25 691-95-00"
                 size={DRAWER_AVATAR_SIZE}
               />
             </Box>
 
-            <Box style={{ marginTop: largeDevice ? 0 : 100 }}>
+            <Box
+              style={{
+                marginTop: ITEMS_CONTEINER_MARGING_TOP,
+              }}
+            >
               {items.map((item) => (
                 <DrawerItem key={item.icon} {...item} />
               ))}

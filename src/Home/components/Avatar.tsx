@@ -1,5 +1,5 @@
 import { Box, Text } from "../../components";
-import { getColor } from "../utils/getColor";
+import { getColor } from "../utils/helpers";
 
 export interface AvatarProps {
   name: string;
@@ -19,7 +19,7 @@ const Avatar = ({ name, size }: AvatarProps) => {
       alignItems="center"
       style={{ borderRadius: size / 2, backgroundColor }}
     >
-      <Text variant="title1" style={{ color, fontSize: size / 3 }}>
+      <Text variant="title1" style={{ color, fontSize: size / 3.2 }}>
         {firstLetters}
       </Text>
     </Box>

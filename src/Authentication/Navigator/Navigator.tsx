@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { AuthenticationRoutes } from "../../components/Navigation";
+import { TransitionPresets } from "@react-navigation/stack";
 import {
   Onboarding,
   Welcome,
@@ -12,7 +13,12 @@ import {
 const AuthenticationStack = createStackNavigator<AuthenticationRoutes>();
 const AuthenticationNavigator = () => {
   return (
-    <AuthenticationStack.Navigator screenOptions={{ headerShown: false }}>
+    <AuthenticationStack.Navigator
+      screenOptions={{
+        headerShown: false,
+        ...TransitionPresets.SlideFromRightIOS,
+      }}
+    >
       <AuthenticationStack.Screen name="Onboarding" component={Onboarding} />
       <AuthenticationStack.Screen name="Welcome" component={Welcome} />
       <AuthenticationStack.Screen name="Login" component={Login} />

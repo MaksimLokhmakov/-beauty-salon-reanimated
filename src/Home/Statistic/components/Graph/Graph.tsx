@@ -7,7 +7,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Box, useTheme } from "../../../../components";
-import { lerp } from "../../../utils/lerp";
+import { lerp } from "../../../utils/helpers";
 import Underlay from "./Underlay";
 import moment from "moment";
 
@@ -24,7 +24,7 @@ export type PointType = {
 
 interface GraphProps {
   data: PointType[];
-  datesPresentetionVariant: "month" | "year" | "full";
+  datesPresentetionVariant: "hour" | "month" | "year" | "full";
 }
 
 const Graph = ({ data, datesPresentetionVariant }: GraphProps) => {
@@ -42,7 +42,9 @@ const Graph = ({ data, datesPresentetionVariant }: GraphProps) => {
         ? "YYYY"
         : datesPresentetionVariant === "year"
         ? "MMM"
-        : "DD"
+        : datesPresentetionVariant === "month"
+        ? "DD"
+        : "HH"
     )
   );
   // const minX = Math.min(...dates);
@@ -66,6 +68,7 @@ const Graph = ({ data, datesPresentetionVariant }: GraphProps) => {
     pointsConteinerTranslateY.value = withTiming(0, {
       duration: 650,
     });
+
     pointsConteinerOpacity.value = withTiming(1, { duration: 300 });
   }, []);
 

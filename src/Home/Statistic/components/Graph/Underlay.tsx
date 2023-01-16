@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import { Box, Text, useTheme } from "../../../../components/Theme";
 import { STEP } from "./Graph";
-import { lerp } from "../../../utils/lerp";
+import { lerp } from "../../../utils/helpers";
 import { PADDING } from "./Graph";
 import { SharedValue } from "react-native-reanimated";
 

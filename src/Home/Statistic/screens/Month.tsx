@@ -1,4 +1,4 @@
-import { FlatList } from "react-native";
+import { FlatList, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { StatisticNavigationProps } from "../../../components/Navigation";
@@ -18,14 +18,16 @@ const Month = ({ navigation }: StatisticNavigationProps<"Month">) => {
   const insets = useSafeAreaInsets();
 
   const points = graphDataMonths.map(({ value, ...ext }, index) => {
-    const cValue = `Прибыль: ${value} руб., Клиентов: ${graphClientsPerDayDataMonths[index].value}`;
-
-    return { value: cValue, ...ext };
+    return {
+      income: value,
+      clients: graphClientsPerDayDataMonths[index].value,
+      ...ext,
+    };
   });
 
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style={Platform.OS === "ios" ? "light" : "dark"} />
 
       <Box flex={1} backgroundColor="white" paddingTop="m">
         <GraphsSlider
@@ -39,13 +41,13 @@ const Month = ({ navigation }: StatisticNavigationProps<"Month">) => {
         <FlatList
           data={points}
           keyExtractor={(item) => item.date.toString()}
-          renderItem={({ item: { value, color, date } }) =>
-            value ? (
+          renderItem={({ item: { income, clients, color, date } }) =>
+            clients ? (
               <Point
                 key={date.toString()}
                 mode="month"
-                onPress={() => navigation.navigate("Day")}
-                {...{ value, date, color }}
+                onPress={() => navigation.navigate("Day", { date })}
+                {...{ income, clients, date, color }}
               />
             ) : null
           }

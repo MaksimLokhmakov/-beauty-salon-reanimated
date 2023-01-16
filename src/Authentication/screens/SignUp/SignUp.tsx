@@ -7,8 +7,8 @@ import { useFormik } from "formik";
 import { TextInput as RNTextInput } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { Checkbox, TextInput } from "../../../components/Form";
-import { phoneInputMask } from "../../utils/consts";
-import { getAllErrors } from "../../utils/getAllErrors";
+import { phoneInputMask } from "../../../helpers/consts";
+import { getAllErrors } from "../../../helpers";
 import * as Yup from "yup";
 
 const SignUpSchema = Yup.object().shape({

@@ -11,7 +11,10 @@ import HomeNavigator, { assets as homeAssets } from "./src/Home";
 import { assets as conteinerAssets } from "./src/components";
 import { LoadAssets, theme } from "./src/components";
 import { ThemeProvider } from "@shopify/restyle";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
 import { AppRoutes } from "./src/components/Navigation";
 
 const assets = [...authenticationAssets, ...conteinerAssets, ...homeAssets];
@@ -28,7 +31,12 @@ export default function App() {
     <ThemeProvider {...{ theme }}>
       <LoadAssets {...{ fonts, assets }}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <AppStack.Navigator screenOptions={{ headerShown: false }}>
+          <AppStack.Navigator
+            screenOptions={{
+              headerShown: false,
+              ...TransitionPresets.SlideFromRightIOS,
+            }}
+          >
             <AppStack.Screen
               name="Authentication"
               component={AuthenticationNavigator}

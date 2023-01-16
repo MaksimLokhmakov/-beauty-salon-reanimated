@@ -20,7 +20,18 @@ const AnimatedBox = Animated.createAnimatedComponent(Box);
 
 interface SearchDataConteinerProps {
   searchValue: string;
-  data: MasterType[] | ClientType[] | AppointmentType[] | null;
+  data:
+    | MasterType[]
+    | ClientType[]
+    | AppointmentType[]
+    | {
+        title: string;
+        day: {
+          master: MasterType;
+          duration: string;
+        }[];
+      }[]
+    | null;
   x: SharedValue<number>;
   children: ReactNode;
 }

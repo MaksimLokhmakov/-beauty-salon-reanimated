@@ -1,1 +1,1 @@
-export { default } from "./Masters";
+export { default } from "./Navigator";

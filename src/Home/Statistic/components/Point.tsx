@@ -5,14 +5,15 @@ import { Feather as Icon } from "@expo/vector-icons";
 import moment from "moment";
 
 interface PointProps {
-  value: string;
+  income: number;
+  clients: number;
   date: Date;
   color: string;
   mode: "month" | "year" | "full";
   onPress: () => void;
 }
 
-const Point = ({ value, date, color, mode, onPress }: PointProps) => {
+const Point = ({ income, clients, date, color, mode, onPress }: PointProps) => {
   const formatDate = moment(date).format(
     mode === "full" ? "YYYY" : mode === "year" ? "MMMM" : "DD MMMM YYYY"
   );
@@ -47,8 +48,13 @@ const Point = ({ value, date, color, mode, onPress }: PointProps) => {
           </Box>
 
           <Text variant="body" textAlign="left">
-            {value}
+            {`Прибыль: ${income} руб., Клиенты: ${clients}`}
           </Text>
+
+          <Text
+            variant="body"
+            textAlign="left"
+          >{`Ср. прибыль с клиента: ${Math.round(income / clients)}`}</Text>
         </Box>
 
         <Icon

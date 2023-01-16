@@ -1,5 +1,4 @@
-import { TextInput, Dimensions } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TextInput, Dimensions, TouchableOpacity } from "react-native";
 import { Box, Text, RoundIconButton, useTheme } from "../../components";
 import { Feather as Icon } from "@expo/vector-icons";
 import { useRef } from "react";
