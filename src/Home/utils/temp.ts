@@ -1,31 +1,48 @@
 import { getColor, randomInteger } from "./helpers";
 
 export type ClientType = {
+  id: string;
   name: string;
   phone: string;
 };
 
 export const clients: ClientType[] = [
-  { name: "Илья Соболев", phone: "+375 25 622-91-77" },
-  { name: "Дима Иванович", phone: "+375 25 981-41-20" },
-  { name: "Максим Лохмаков", phone: "+375 25 231-92-01" },
-  { name: "Денис Никифоров", phone: "+375 22 111-49-32" },
-  { name: "Елена Кухарева", phone: "+375 25 121-12-54" },
-  { name: "Алина Маслинекова", phone: "+375 25 826-90-10" },
+  { id: "1", name: "Илья Соболев", phone: "+375 25 622-91-77" },
+  { id: "2", name: "Дима Иванович", phone: "+375 25 981-41-20" },
+  { id: "3", name: "Максим Лохмаков", phone: "+375 25 231-92-01" },
+  { id: "4", name: "Денис Никифоров", phone: "+375 22 111-49-32" },
+  { id: "5", name: "Елена Кухарева", phone: "+375 25 121-12-54" },
+  { id: "6", name: "Алина Маслинекова", phone: "+375 25 826-90-10" },
 ];
 
 export type MasterType = {
+  id: string;
   name: string;
   phone: string;
   percent: number;
 };
 
 export const masters: MasterType[] = [
-  { name: "Максим Лохмаков", phone: "+375 25 231-92-01", percent: 0.18 },
-  { name: "Денис Никифоров", phone: "+375 22 111-49-32", percent: 0.16 },
-  { name: "Илья Соболев", phone: "+375 25 622-91-77", percent: 0.15 },
-  { name: "Дима Иванович", phone: "+375 25 981-41-20", percent: 0.14 },
-  { name: "Елена Кухарева", phone: "+375 25 121-12-54", percent: 0.12 },
+  {
+    id: "1",
+    name: "Максим Лохмаков",
+    phone: "+375 25 231-92-01",
+    percent: 0.18,
+  },
+  {
+    id: "2",
+    name: "Денис Никифоров",
+    phone: "+375 22 111-49-32",
+    percent: 0.16,
+  },
+  { id: "3", name: "Илья Соболев", phone: "+375 25 622-91-77", percent: 0.15 },
+  { id: "4", name: "Дима Иванович", phone: "+375 25 981-41-20", percent: 0.14 },
+  {
+    id: "5",
+    name: "Елена Кухарева",
+    phone: "+375 25 121-12-54",
+    percent: 0.12,
+  },
 ];
 
 export const patternOption = [
@@ -767,4 +784,61 @@ export const shadule = [
     { master: masters[1], duration: "09:00 - 21:00" },
     { master: masters[2], duration: "09:00 - 20:00" },
   ],
+];
+
+export const dayMasters = [
+  {
+    id: "sd",
+    name: "Максим Лохмаков",
+    phone: "+375 25 231-92-01",
+    percent: 0.18,
+  },
+  {
+    id: "ss",
+    name: "Денис Никифоров",
+    phone: "+375 22 111-49-32",
+    percent: 0.16,
+  },
+];
+
+export const dayClients = [
+  { id: "ss", name: "Илья Соболев", phone: "+375 25 622-91-77" },
+  { id: "dd", name: "Дима Иванович", phone: "+375 25 981-41-20" },
+  { id: "ff", name: "Максим Лохмаков", phone: "+375 25 231-92-01" },
+  { id: "gg", name: "Денис Никифоров", phone: "+375 22 111-49-32" },
+];
+
+export const dayAppointments = [
+  {
+    id: "qq",
+    client: "Максим Лохмаков",
+    master: "Денис Никифоров",
+    start: new Date("2022-11-17T15:00:00.061Z"),
+    finish: new Date("2022-11-17T16:00:00.061Z"),
+    price: 60,
+  },
+  {
+    id: "ww",
+    client: "Эллина Крюкова",
+    master: "Максим Лохмаков",
+    start: new Date("2022-11-19T16:00:00.061Z"),
+    finish: new Date("2022-11-19T17:00:00.061Z"),
+    price: 80,
+  },
+  {
+    id: "ee",
+    client: "Ольга Евгеньева",
+    master: "Максим Лохмаков",
+    start: new Date("2022-11-17T17:00:00.061Z"),
+    finish: new Date("2022-11-17T18:00:00.061Z"),
+    price: 70,
+  },
+  {
+    id: "rr",
+    client: "Максим Лохмаков",
+    master: "Тимур Батрудинов",
+    start: new Date("2022-11-18T16:00:00.061Z"),
+    finish: new Date("2022-11-18T17:00:00.061Z"),
+    price: 65,
+  },
 ];

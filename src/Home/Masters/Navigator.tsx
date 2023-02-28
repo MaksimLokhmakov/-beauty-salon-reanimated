@@ -8,6 +8,7 @@ const Masters = createStackNavigator<MastersRoutes>();
 const MastersNavigator = () => {
   return (
     <Masters.Navigator
+      initialRouteName="MastersList"
       screenOptions={{
         headerShown: false,
       }}

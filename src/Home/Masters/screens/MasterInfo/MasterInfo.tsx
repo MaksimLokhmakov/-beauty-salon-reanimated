@@ -36,7 +36,10 @@ const Master = ({
       <Box flex={1} backgroundColor="white">
         <HeaderConteiner>
           <Header
-            left={{ icon: "arrow-left", onPress: () => navigation.goBack() }}
+            left={{
+              icon: "arrow-left",
+              onPress: () => navigation.goBack(),
+            }}
             title="Карта мастера"
             dark
           />

@@ -1,5 +1,6 @@
 import { Box, Text, useTheme } from "../../../../components";
 import { Feather as Icon } from "@expo/vector-icons";
+import { StyleSheet } from "react-native";
 
 interface InfoCardProps {
   // @ts-ignore: Unreachable code error
@@ -20,17 +21,7 @@ const InfoCard = ({ icon, title }: InfoCardProps) => {
       alignItems="center"
       justifyContent="center"
       borderRadius="m"
-      style={{
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 6,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 8.3,
-
-        elevation: 13,
-      }}
+      style={styles.shadow}
     >
       <Icon name={icon} size={22} color={theme.colors.primary} />
 
@@ -42,5 +33,19 @@ const InfoCard = ({ icon, title }: InfoCardProps) => {
     </Box>
   );
 };
+
+const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 8.3,
+
+    elevation: 13,
+  },
+});
 
 export default InfoCard;

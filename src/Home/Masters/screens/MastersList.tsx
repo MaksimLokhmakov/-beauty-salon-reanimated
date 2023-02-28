@@ -10,11 +10,14 @@ import {
   InfoBox,
 } from "../../components";
 import { useSharedValue } from "react-native-reanimated";
-
-// ? temp
-import { masters } from "../../utils/temp";
+import { useSelector, useDispatch } from "react-redux";
+import { removeMaster } from "../../../features/mastersSlice";
+import type { RootState } from "../../../store/Store";
 
 const MastersList = ({ navigation }: MastersNavigationProps<"MastersList">) => {
+  const masters = useSelector((state: RootState) => state.mastersStore.masters);
+  const dispatch = useDispatch();
+
   const [search, setSearch] = useState("");
   const [searchFocus, setSearchFocus] = useState(false);
 
@@ -23,6 +26,11 @@ const MastersList = ({ navigation }: MastersNavigationProps<"MastersList">) => {
 
   const x = useSharedValue(0);
   const y = useSharedValue(0);
+
+  const handleBlurInSearchField = () => {
+    setSearch("");
+    setTimeout(() => setSearchFocus(false), 200);
+  };
 
   const searchData = search
     ? masters.filter(({ name }) =>
@@ -46,30 +54,30 @@ const MastersList = ({ navigation }: MastersNavigationProps<"MastersList">) => {
           onChangeText={(e) => setSearch(e)}
           onClear={() => setSearch("")}
           onFocus={() => setSearchFocus(true)}
-          onBlur={() => {
-            setSearch("");
-            setTimeout(() => setSearchFocus(false), 200);
-          }}
+          onBlur={handleBlurInSearchField}
           {...{ x, y }}
         />
 
         <Box flex={1} zIndex={!searchFocus ? 1 : 0}>
           <ScrollView ref={scroll} {...{ y }}>
-            {masters.map(({ name, phone, percent }, index) => (
-              <InfoBox
-                key={index}
-                title={name}
-                subtitle={phone}
-                label={(percent * 100).toFixed() + " %"}
-                simultaneousHandlers={scroll}
-                onPress={() =>
-                  navigation.navigate("MasterInfo", {
-                    master: { id: phone, name, phone, percent },
-                  })
-                }
-                onDelete={() => {}}
-              />
-            ))}
+            {masters.map((master) => {
+              const { id, name, phone, percent } = master;
+              return (
+                <InfoBox
+                  key={id}
+                  title={name}
+                  subtitle={phone}
+                  label={(percent * 100).toFixed() + " %"}
+                  simultaneousHandlers={scroll}
+                  onDelete={() => dispatch(removeMaster(id))}
+                  onPress={() =>
+                    navigation.navigate("MasterInfo", {
+                      master,
+                    })
+                  }
+                />
+              );
+            })}
           </ScrollView>
         </Box>
 
@@ -79,21 +87,24 @@ const MastersList = ({ navigation }: MastersNavigationProps<"MastersList">) => {
           searchValue={search}
           {...{ x }}
         >
-          {searchData.map(({ name, phone, percent }, index) => (
-            <InfoBox
-              key={index}
-              title={name}
-              subtitle={phone}
-              label={(percent * 100).toFixed() + " %"}
-              simultaneousHandlers={searchResultScrollRef}
-              onPress={() =>
-                navigation.navigate("MasterInfo", {
-                  master: { id: phone, name, phone, percent },
-                })
-              }
-              onDelete={() => {}}
-            />
-          ))}
+          {searchData.map((master) => {
+            const { id, name, phone, percent } = master;
+            return (
+              <InfoBox
+                key={id}
+                title={name}
+                subtitle={phone}
+                label={(percent * 100).toFixed() + " %"}
+                simultaneousHandlers={searchResultScrollRef}
+                onPress={() =>
+                  navigation.navigate("MasterInfo", {
+                    master,
+                  })
+                }
+                onDelete={() => dispatch(removeMaster(id))}
+              />
+            );
+          })}
         </SearchResult>
       </Box>
     </>

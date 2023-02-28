@@ -13,6 +13,8 @@ import { phoneInputMask } from "../../../../helpers/consts";
 import { useRef, useState } from "react";
 import Slide from "./Slide";
 import { Checkbox } from "../../../../components/Form";
+import { useDispatch } from "react-redux";
+import { addMaster } from "../../../../features/mastersSlice";
 
 const { width } = Dimensions.get("window");
 
@@ -47,6 +49,8 @@ const AddMasterSchema = Yup.object().shape({
 });
 
 const AddMaster = ({ navigation }: MastersNavigationProps<"AddMaster">) => {
+  const dispatch = useDispatch();
+
   const scroll = useRef<ScrollView>(null);
   const surname = useRef<RNTextInput>(null);
   const phone = useRef<RNTextInput>(null);
@@ -66,7 +70,15 @@ const AddMaster = ({ navigation }: MastersNavigationProps<"AddMaster">) => {
         passwordConfirmation: "",
       },
       validationSchema: AddMasterSchema,
-      onSubmit: () => {
+      onSubmit: ({ name, surname, phone, percent }) => {
+        dispatch(
+          addMaster({
+            id: Math.random().toString(),
+            name: name + " " + surname,
+            phone,
+            percent: Number(percent) / 100,
+          })
+        );
         navigation.goBack();
       },
     });

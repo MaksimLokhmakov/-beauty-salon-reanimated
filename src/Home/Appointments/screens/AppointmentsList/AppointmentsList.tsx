@@ -10,18 +10,23 @@ import { AppointmentsNavigationProps } from "../../../../components/Navigation";
 import { useCallback, useRef, useState } from "react";
 import { ScrollView as GHScrollView } from "react-native-gesture-handler";
 import Section from "./Section";
-import { getDuration, capitalizeFirstLetter } from "../../../utils/helpers";
-import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import { removeAppointment } from "../../../../features/appointmentsSlice";
+import type { RootState } from "../../../../store/Store";
+import { groupByDate, search } from "../../helpers";
 
 // ? temp
-import { AppointmentType } from "../../../utils/temp";
 import { appointments as cAppointments } from "../../../utils/temp";
 
 const AppointmentsList = ({
   navigation,
 }: AppointmentsNavigationProps<"AppointmentsList">) => {
-  const [appointments, setAppointments] = useState(cAppointments);
-  const [search, setSearch] = useState("");
+  const appointments = useSelector(
+    (state: RootState) => state.appointmentsStore.appointments
+  );
+  const dispatch = useDispatch();
+
+  const [searchValue, setSearchValue] = useState("");
   const [searchFocus, setSearchFocus] = useState(false);
 
   const scroll = useRef<GHScrollView>(null);
@@ -30,50 +35,11 @@ const AppointmentsList = ({
   const x = useSharedValue(0);
   const y = useSharedValue(0);
 
-  // ? ----- temp
   const handleDeleteAppointment = useCallback((id: string) => {
-    setAppointments((prev) =>
-      prev.filter((appointment) => appointment.id !== id)
-    );
+    dispatch(removeAppointment(id));
   }, []);
 
-  const groupByDate = (appointments: AppointmentType[]) => {
-    // @ts-ignore: Unreachable code error
-    let result = [];
-
-    const groupByCategory = appointments.reduce((group, product) => {
-      const { start } = product;
-      const category = capitalizeFirstLetter(
-        moment(start).format("dd, DD MMMM")
-      );
-
-      // @ts-ignore: Unreachable code error
-      group[category] = group[category] ?? [];
-
-      // @ts-ignore: Unreachable code error
-      group[category].push(product);
-
-      return group;
-    }, {});
-
-    Object.entries(groupByCategory).forEach(([key, value]) => {
-      result.push({ title: key, appointments: value });
-    });
-
-    // @ts-ignore: Unreachable code error
-    return result;
-  };
-
-  // ?  temp ----
-  const searchData = search
-    ? appointments.filter(
-        ({ client, master, start, finish }) =>
-          client.toLowerCase().includes(search.toLowerCase()) ||
-          master.toLowerCase().includes(search.toLowerCase()) ||
-          start.getDate().toString().includes(search) ||
-          getDuration(start, finish).includes(search)
-      )
-    : [];
+  const searchData = search(appointments, searchValue);
 
   return (
     <>
@@ -87,9 +53,9 @@ const AppointmentsList = ({
             icon: "plus",
             onPress: () => navigation.navigate("AddAppointment"),
           }}
-          value={search}
-          onChangeText={(e) => setSearch(e)}
-          onClear={() => setSearch("")}
+          value={searchValue}
+          onChangeText={(e) => setSearchValue(e)}
+          onClear={() => setSearchValue("")}
           onFocus={() => setSearchFocus(true)}
           onBlur={() => setTimeout(() => setSearchFocus(false), 200)}
           {...{ x, y }}
@@ -111,7 +77,7 @@ const AppointmentsList = ({
         <SearchResult
           ref={searchResultScrollRef}
           data={appointments}
-          searchValue={search}
+          searchValue={searchValue}
           {...{ x }}
         >
           {groupByDate(searchData).map(({ appointments, title }) => {

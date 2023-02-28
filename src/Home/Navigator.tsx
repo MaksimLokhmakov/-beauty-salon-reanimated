@@ -14,6 +14,7 @@ const Drawer = createDrawerNavigator<HomeRoutes>();
 const HomeNavigator = () => {
   return (
     <Drawer.Navigator
+      initialRouteName="Appointments"
       drawerContent={DrawerContent}
       screenOptions={{
         headerShown: false,

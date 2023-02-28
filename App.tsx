@@ -17,6 +17,9 @@ import {
 } from "@react-navigation/stack";
 import { AppRoutes } from "./src/components/Navigation";
 
+import { Provider } from "react-redux";
+import { store } from "./src/store/Store";
+
 const assets = [...authenticationAssets, ...conteinerAssets, ...homeAssets];
 const fonts = {
   "SFProText-Bold": require("./assets/fonts/SF-Pro-Text-Bold.otf"),
@@ -28,23 +31,25 @@ const AppStack = createStackNavigator<AppRoutes>();
 
 export default function App() {
   return (
-    <ThemeProvider {...{ theme }}>
-      <LoadAssets {...{ fonts, assets }}>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <AppStack.Navigator
-            screenOptions={{
-              headerShown: false,
-              ...TransitionPresets.SlideFromRightIOS,
-            }}
-          >
-            <AppStack.Screen
-              name="Authentication"
-              component={AuthenticationNavigator}
-            />
-            <AppStack.Screen name="Home" component={HomeNavigator} />
-          </AppStack.Navigator>
-        </SafeAreaProvider>
-      </LoadAssets>
-    </ThemeProvider>
+    <Provider {...{ store }}>
+      <ThemeProvider {...{ theme }}>
+        <LoadAssets {...{ fonts, assets }}>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <AppStack.Navigator
+              screenOptions={{
+                headerShown: false,
+                ...TransitionPresets.SlideFromRightIOS,
+              }}
+            >
+              <AppStack.Screen
+                name="Authentication"
+                component={AuthenticationNavigator}
+              />
+              <AppStack.Screen name="Home" component={HomeNavigator} />
+            </AppStack.Navigator>
+          </SafeAreaProvider>
+        </LoadAssets>
+      </ThemeProvider>
+    </Provider>
   );
 }

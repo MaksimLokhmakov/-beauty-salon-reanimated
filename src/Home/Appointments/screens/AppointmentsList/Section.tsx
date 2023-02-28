@@ -15,6 +15,7 @@ import { capitalizeFirstLetter, getDuration } from "../../../utils/helpers";
 // ? temp
 import { AppointmentType } from "../../../utils/temp";
 
+const SECTION_HEADER_HEIGHT = 30;
 const AnimatedBox = Animated.createAnimatedComponent(Box);
 
 interface SectionType {
@@ -34,10 +35,10 @@ const Section = ({
     useNavigation<
       DrawerNavigationProp<AppointmentsRoutes, "AppointmentsList", undefined>
     >();
-  const headerHeight = useSharedValue(30);
+  const sectionHeaderHeight = useSharedValue(SECTION_HEADER_HEIGHT);
 
   const headerStyle = useAnimatedStyle(() => {
-    return { height: headerHeight.value };
+    return { height: sectionHeaderHeight.value };
   });
 
   return (
@@ -46,7 +47,7 @@ const Section = ({
         <SectionHeader {...{ title }} />
       </AnimatedBox>
 
-      {appointments.map(({ client, master, start, finish, id }, index) => {
+      {appointments.map(({ client, master, start, finish, id }) => {
         const duration = getDuration(start, finish);
         const date = capitalizeFirstLetter(
           moment(start).format("dd, DD MMM YYYY")
@@ -54,11 +55,24 @@ const Section = ({
 
         const handleDeleteAppointment = () => {
           if (appointments.length === 1) {
-            headerHeight.value = withTiming(0);
+            sectionHeaderHeight.value = withTiming(0);
             setTimeout(() => onDeleteAppointment(id), 200);
           } else {
             onDeleteAppointment(id);
           }
+        };
+
+        const handlePressAppointment = () => {
+          navigation.navigate("AppointmentInfo", {
+            appointment: {
+              id: Math.random().toString(),
+              master,
+              date,
+              duration,
+              client,
+              price: "80",
+            },
+          });
         };
 
         return (
@@ -67,18 +81,7 @@ const Section = ({
             title={client}
             subtitle={"Мастер: " + master}
             label={duration}
-            onPress={() =>
-              navigation.navigate("AppointmentInfo", {
-                appointment: {
-                  id: master + client,
-                  master,
-                  date,
-                  duration,
-                  client,
-                  price: "80",
-                },
-              })
-            }
+            onPress={handlePressAppointment}
             onDelete={handleDeleteAppointment}
             {...{ simultaneousHandlers }}
           />

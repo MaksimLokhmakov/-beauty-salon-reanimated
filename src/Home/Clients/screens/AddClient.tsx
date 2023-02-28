@@ -12,6 +12,8 @@ import {
 import { phoneInputMask } from "../../../Authentication/utils/consts";
 import { ClientsNavigationProps } from "../../../components/Navigation";
 import { getAllErrors } from "../../../helpers";
+import { useDispatch } from "react-redux";
+import { addClient } from "../../../features/clientsSlice";
 import * as Yup from "yup";
 
 const AddMasterSchema = Yup.object().shape({
@@ -30,6 +32,8 @@ const AddMasterSchema = Yup.object().shape({
 });
 
 const AddClient = ({ navigation }: ClientsNavigationProps<"AddClient">) => {
+  const dispatch = useDispatch();
+
   const surname = useRef<RNTextInput>(null);
   const phone = useRef<RNTextInput>(null);
 
@@ -41,7 +45,14 @@ const AddClient = ({ navigation }: ClientsNavigationProps<"AddClient">) => {
         phone: "",
       },
       validationSchema: AddMasterSchema,
-      onSubmit: () => {
+      onSubmit: ({ name, surname, phone }) => {
+        dispatch(
+          addClient({
+            id: Math.random().toString(),
+            name: name + " " + surname,
+            phone,
+          })
+        );
         navigation.goBack();
       },
     });

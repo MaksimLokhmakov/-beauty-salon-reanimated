@@ -10,11 +10,14 @@ import {
   InfoBox,
 } from "../../components";
 import { useSharedValue } from "react-native-reanimated";
-
-// ? temp
-import { clients } from "../../utils/temp";
+import { useSelector, useDispatch } from "react-redux";
+import { removeClient } from "../../../features/clientsSlice";
+import type { RootState } from "../../../store/Store";
 
 const ClientsList = ({ navigation }: ClientsNavigationProps<"ClientsList">) => {
+  const clients = useSelector((state: RootState) => state.clientsStore.clients);
+  const dispatch = useDispatch();
+
   const [search, setSearch] = useState("");
   const [searchFocus, setSearchFocus] = useState(false);
 
@@ -55,9 +58,9 @@ const ClientsList = ({ navigation }: ClientsNavigationProps<"ClientsList">) => {
 
         <Box height="100%" zIndex={!searchFocus ? 1 : 0}>
           <ScrollView ref={scroll} {...{ y }}>
-            {clients.map(({ name, phone }, index) => (
+            {clients.map(({ id, name, phone }) => (
               <InfoBox
-                key={index}
+                key={id}
                 title={name}
                 subtitle={phone}
                 simultaneousHandlers={scroll}
@@ -66,7 +69,7 @@ const ClientsList = ({ navigation }: ClientsNavigationProps<"ClientsList">) => {
                     client: { id: phone, name, phone },
                   })
                 }
-                onDelete={() => {}}
+                onDelete={() => dispatch(removeClient(id))}
               />
             ))}
           </ScrollView>
@@ -78,9 +81,9 @@ const ClientsList = ({ navigation }: ClientsNavigationProps<"ClientsList">) => {
           searchValue={search}
           {...{ x }}
         >
-          {searchData.map(({ name, phone }, index) => (
+          {searchData.map(({ id, name, phone }) => (
             <InfoBox
-              key={index}
+              key={id}
               title={name}
               subtitle={phone}
               simultaneousHandlers={searchResultScrollRef}
@@ -89,7 +92,7 @@ const ClientsList = ({ navigation }: ClientsNavigationProps<"ClientsList">) => {
                   client: { id: phone, name, phone },
                 })
               }
-              onDelete={() => {}}
+              onDelete={() => dispatch(removeClient(id))}
             />
           ))}
         </SearchResult>

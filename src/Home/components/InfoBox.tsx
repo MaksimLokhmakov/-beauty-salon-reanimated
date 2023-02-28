@@ -21,7 +21,7 @@ export interface InfoBoxProps {
   simultaneousHandlers?: React.Ref<unknown> | React.Ref<unknown>[];
   swipeable?: boolean;
   onDelete?: () => void;
-  onPress?: (phone: string) => void;
+  onPress?: (id: string) => void;
 }
 
 const InfoBox = ({

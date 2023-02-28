@@ -6,12 +6,17 @@ import { CommonActions } from "@react-navigation/native";
 
 import { Box, useTheme } from "../../../../components";
 import { Subheader } from "../../components";
-import { InfoConteiner, InfoBox, Label } from "../../../components";
+import {
+  InfoConteiner,
+  InfoBox,
+  Label,
+  CBottomSheet,
+} from "../../../components";
 import { StatisticNavigationProps } from "../../../../components/Navigation";
-import { capitalizeFirstLetter } from "../../../utils/helpers";
+import { capitalizeFirstLetter, getDuration } from "../../../utils/helpers";
 
-// ! temp
-import { graphClientsPerHour, graphIncomePerHour } from "../../../utils/temp";
+// !temp
+import { dayMasters, dayAppointments, dayClients } from "../../../utils/temp";
 
 const { width } = Dimensions.get("window");
 
@@ -41,81 +46,87 @@ const Day = ({ navigation, route }: StatisticNavigationProps<"Day">) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Box marginBottom="s">
             <InfoConteiner title="Мастера">
-              <InfoBox
-                title="Максим Лохмаков"
-                subtitle="+375 25 691-95-00"
+              <Label
+                icon="user"
+                text={dayMasters.length.toString()}
                 onPress={() => {}}
-                width={infoBoxWidth}
-                swipeable={false}
-                label="18 %"
-                padding="s"
               />
-              <InfoBox
-                title="Денис Никифоров"
-                subtitle="+375 25 111-68-92"
-                width={infoBoxWidth}
-                swipeable={false}
-                separator={false}
-                label="16 %"
-                padding="s"
-              />
+              {/* {dayMasters.map((master, index) => (
+                <InfoBox
+                  title={master.name}
+                  subtitle={master.phone}
+                  onPress={() =>
+                    navigation.dispatch(
+                      CommonActions.navigate({
+                        name: "MasterInfo",
+                        params: { master },
+                      })
+                    )
+                  }
+                  width={infoBoxWidth}
+                  swipeable={false}
+                  label={`${master.percent * 100} %`}
+                  padding="s"
+                  separator={index !== dayMasters.length - 1}
+                />
+              ))} */}
             </InfoConteiner>
           </Box>
 
           <Box marginBottom="s">
             <InfoConteiner title="Клиенты">
-              <InfoBox
-                title="Илья Соболев"
-                subtitle="+375 25 622-91-77"
-                width={infoBoxWidth}
-                swipeable={false}
-                padding="s"
+              <Label
+                icon="user"
+                text={dayClients.length.toString()}
+                onPress={() => {}}
               />
-              <InfoBox
-                title="Яна Кухарева"
-                subtitle="+375 25 121-12-54"
-                width={infoBoxWidth}
-                swipeable={false}
-                padding="s"
-              />
-              <InfoBox
-                title="Елена Кувшин"
-                subtitle="+375 25 525-22-94"
-                width={infoBoxWidth}
-                swipeable={false}
-                separator={false}
-                padding="s"
-              />
+              {/* {dayClients.map((client, index) => (
+                <InfoBox
+                  title={client.name}
+                  subtitle={client.phone}
+                  width={infoBoxWidth}
+                  swipeable={false}
+                  padding="s"
+                  onPress={() =>
+                    navigation.dispatch(
+                      CommonActions.navigate({
+                        name: "ClientInfo",
+                        params: { client },
+                      })
+                    )
+                  }
+                  separator={index !== dayClients.length - 1}
+                />
+              ))} */}
             </InfoConteiner>
           </Box>
 
           <Box marginBottom="s">
             <InfoConteiner title="Приемы">
-              <InfoBox
-                title="Илья Соболев"
-                subtitle="Мастер: Максим Лохмаков"
-                label="09:00 - 11:00"
-                width={infoBoxWidth}
-                swipeable={false}
-                padding="s"
+              <Label
+                icon="user"
+                text={dayAppointments.length.toString()}
+                onPress={() => {}}
               />
-              <InfoBox
-                title="Яна Кухарева"
-                subtitle="Мастер: Денис Никифоров"
-                label="11:00 - 15:00"
-                width={infoBoxWidth}
-                swipeable={false}
-                padding="s"
-              />
-              <InfoBox
-                title="Елена Кувшин"
-                subtitle="Мастер: Максим Лохмаков"
-                label="15:00 - 19:00"
-                width={infoBoxWidth}
-                swipeable={false}
-                separator={false}
-                padding="s"
-              />
+              {/* {dayAppointments.map((appointment, index) => (
+                <InfoBox
+                  title={appointment.client}
+                  subtitle={`Мастер: ${appointment.master}`}
+                  label={getDuration(appointment.start, appointment.finish)}
+                  width={infoBoxWidth}
+                  swipeable={false}
+                  padding="s"
+                  onPress={() =>
+                    navigation.dispatch(
+                      CommonActions.navigate({
+                        name: "AppointmentInfo",
+                        params: { appointment },
+                      })
+                    )
+                  }
+                  separator={index !== dayClients.length - 1}
+                />
+              ))} */}
             </InfoConteiner>
           </Box>
 
@@ -128,7 +139,7 @@ const Day = ({ navigation, route }: StatisticNavigationProps<"Day">) => {
           <Box marginBottom="s">
             <InfoConteiner title="Доп. услуги">
               <Box marginBottom="s">
-                <Label icon="pie-chart" text={`Процедуры 1`} />
+                <Label icon="pie-chart" text={`Процедуры: 1`} />
               </Box>
 
               <Box marginBottom="s">
@@ -136,7 +147,7 @@ const Day = ({ navigation, route }: StatisticNavigationProps<"Day">) => {
               </Box>
 
               <Box marginBottom="s">
-                <Label icon="pocket" text={`Массаж 1`} />
+                <Label icon="pocket" text={`Массаж: 1`} />
               </Box>
 
               <Label icon="pen-tool" text={`Окрашивание: 2`} />
@@ -144,6 +155,10 @@ const Day = ({ navigation, route }: StatisticNavigationProps<"Day">) => {
           </Box>
         </ScrollView>
       </Box>
+
+      <CBottomSheet>
+        
+      </CBottomSheet>
     </>
   );
 };
